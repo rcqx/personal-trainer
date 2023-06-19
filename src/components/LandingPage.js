@@ -1,4 +1,5 @@
 import cover from '../../src/assets/herocover.jpg'
+import Footer from './Footer';
 
 const LandingPage = () => (
   <header className='sticky top-0'>
@@ -12,9 +13,9 @@ const LandingPage = () => (
           ner
         </h1>
         <ul className="w-1/3 flex justify-between items-center">
-          <li className="cursor-pointer">About Us</li>
-          <li className="cursor-pointer">Pricing</li>
-          <li className="cursor-pointer">Contact</li>
+          <li className="cursor-pointer text-slate-800 antialiased">About Us</li>
+          <li className="cursor-pointer text-slate-800 antialiased">Pricing</li>
+          <li className="cursor-pointer text-slate-800 antialiased">Contact</li>
           <button
             className="font-[Inter] border border-blue-600 py-2 px-4 rounded-md bg-blue-600 text-white hover:bg-blue-800"
           >
@@ -32,10 +33,11 @@ const LandingPage = () => (
           Discover More
         </button>
       </div>
-      <div className="h-96 object-cover overflow-hidden">
-        <img src={cover} alt='hero-image' />
+      <div className="object-cover overflow-hidden flex m-[0_auto] max-w-7xl">
+        <img src={cover} alt='hero-cover' />
       </div>
     </div>
+    <Footer />
   </header>
 );
 
