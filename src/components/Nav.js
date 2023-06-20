@@ -20,7 +20,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 bg-white ${isScrolled && "opacity-95"}`}>
+    <header className={`sticky top-0 z-40 bg-white ${isScrolled && "opacity-95"}`}>
       <nav className="flex h-[7em] justify-between items-center m-[0_auto] max-w-7xl">
         <h1 className="font-[Newsreader] text-5xl text-blue-600 antialiased">
           FitSmart

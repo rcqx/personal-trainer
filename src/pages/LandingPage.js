@@ -1,5 +1,5 @@
 import cover from '../../src/assets/herocover.jpg'
-import Footer from './Footer';
+import Footer from '../components/Footer';
 
 const LandingPage = () => (
   <header className='sticky top-0 z-0'>
@@ -18,7 +18,6 @@ const LandingPage = () => (
         <img src={cover} alt='hero-cover' />
       </div>
     </div>
-    <Footer />
   </header>
 );
 
