@@ -5,7 +5,7 @@ import Nav from './components/Nav';
 import LandingNav from './components/LandingNav';
 import LandingPage from './components/LandingPage';
 import ExercisePlans from './pages/ExercisePlans';
-import Footer from './components/Footer';
+import CreateWorkout from './pages/CreateWorkout';
 
 function App() {
   const user = true;
@@ -20,8 +20,8 @@ function App() {
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/exercise-plans' element={<ExercisePlans />} />
+        <Route path='/create-workout' element={<CreateWorkout />} />
       </Routes>
-      <Footer />
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import Nav from "../components/Nav";
 import cardio from "../assets/cardio.jpg"
 import strength from "../assets/weights.jpg"
 import multi from "../assets/crossfit.jpg"
 import { AiOutlineFileAdd } from "react-icons/ai";
+import Footer from "../components/Footer";
 
 const ExercisePlans = () => (
   <div className="flex flex-col justify-between">
@@ -47,6 +47,7 @@ const ExercisePlans = () => (
         </div>
       </div>
     </div>
+    <Footer />
   </div >
 );
 

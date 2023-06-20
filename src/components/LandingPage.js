@@ -4,7 +4,6 @@ import Footer from './Footer';
 const LandingPage = () => (
   <header className='sticky top-0 z-0'>
     <div>
-
       <div className="h-[22rem] flex flex-col justify-center items-center">
         <h1 className="font-[Newsreader] text-6xl tracking-wide w-4/6 text-slate-800">
           Customize your fitness plan with AI-powered routines and reach your goals.
