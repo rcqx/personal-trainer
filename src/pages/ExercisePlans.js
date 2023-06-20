@@ -4,7 +4,6 @@ import strength from "../assets/weights.jpg"
 import multi from "../assets/crossfit.jpg"
 import { AiOutlineFileAdd } from "react-icons/ai";
 import Modal from "../components/createWorkout/modal";
-import Footer from "../components/Footer";
 
 const ExercisePlans = () => {
   const [modal, setModal] = useState(false);
@@ -12,8 +11,6 @@ const ExercisePlans = () => {
   const showModal = () => {
     setModal(true);
   };
-
-  console.log(modal);
 
   return (
     <div className="flex flex-col justify-between">
@@ -45,15 +42,15 @@ const ExercisePlans = () => {
               <div className="px-4 py-6 bg-[#FAFAF5]">
                 <h3 className="text-start font-semibold">Hypertrophy Fall-Summer Plan 2023</h3>
                 <h3 className="text-start font-semibold text-amber-600">In progress</h3>
-                <p className="text-start text-sm text-slate-600">Improve Cardiovascular performance</p>
+                <p className="text-start text-sm text-slate-600">Increase mass and strength</p>
               </div>
             </div>
             <div className="w-1/3 border border-slate-200 shadow-md rounded-3xl overflow-hidden cursor-pointer">
               <img src={multi} alt="thumbnail" />
               <div className="px-4 py-6 bg-[#FAFAF5]">
                 <h3 className="text-start font-semibold">Cutting Summer Plan 2023</h3>
-                <h3 className="text-start font-semibold text-blue-00">Start</h3>
-                <p className="text-start text-sm text-slate-600">Improve Cardiovascular performance</p>
+                <h3 className="text-start font-semibold text-blue-600">Start</h3>
+                <p className="text-start text-sm text-slate-600">Lower body fat percetage</p>
               </div>
             </div>
           </div>

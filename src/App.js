@@ -5,7 +5,6 @@ import Nav from './components/Nav';
 import LandingNav from './components/LandingNav';
 import LandingPage from './pages/LandingPage';
 import ExercisePlans from './pages/ExercisePlans';
-import CreateWorkout from './pages/CreateWorkout';
 import Footer from './components/Footer';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/exercise-plans' element={<ExercisePlans />} />
-        <Route path='/create-workout' element={<CreateWorkout />} />
       </Routes>
       <Footer />
     </div>
