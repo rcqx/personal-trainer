@@ -3,13 +3,11 @@ import cardio from "../assets/cardio.jpg"
 import strength from "../assets/weights.jpg"
 import multi from "../assets/crossfit.jpg"
 import { AiOutlineFileAdd } from "react-icons/ai";
-import Footer from "../components/Footer";
 
 const ExercisePlans = () => (
-  <div className="flex flex-col justify-between h-screen">
-    <Nav />
+  <div className="flex flex-col justify-between">
     <div className="justify-between items-center m-[0_auto] max-w-7xl">
-      <div className="flex justify-between items-center h-1/6 border-b border-slate-400">
+      <div className="flex justify-between items-center border-b antialiased border-slate-200 h-[6em]">
         <h1 className="font-[Newsreader] text-5xl">Exercise Plans</h1>
         <button
           className="font-[Inter] flex justify-center 
@@ -19,7 +17,7 @@ const ExercisePlans = () => (
           A New Plan
         </button>
       </div>
-      <div className="h-5/6">
+      <div>
         <h2 className="text-start text-lg font-semibold py-5">Routines (1)</h2>
         <div className="workout-cards py-2 flex justify-between items-center gap-5 mb-20">
           <div className="w-1/3 border border-slate-200 shadow-md rounded-3xl overflow-hidden cursor-pointer">
@@ -49,8 +47,7 @@ const ExercisePlans = () => (
         </div>
       </div>
     </div>
-    <Footer />
-  </div>
+  </div >
 );
 
 export default ExercisePlans;
