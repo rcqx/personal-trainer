@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Model = require('../models/model');
+const FormModel = require('../models/workoutForm');
 
 // POST
 router.post('/post', async (req, res) => {
@@ -15,7 +16,24 @@ router.post('/post', async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+});
 
+// TEST
+router.post('/create-workout', async (req, res) => {
+  const data = new FormModel({
+    name: req.body.name,
+    objective: req.body.objective,
+    bodyComposition: req.body.bodyComposition,
+    fitnessGoal: req.body.fitnessGoal,
+    status: req.body.status,
+  });
+
+  try {
+    const dataToSave = await data.save();
+    res.status(200).json(dataToSave);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 // GET ALL
