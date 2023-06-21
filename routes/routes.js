@@ -1,0 +1,34 @@
+const express = require("express");
+const router = express.Router();
+const Model = require('../model/model');
+
+// POST
+router.post('/post', (req, res) => {
+  const data = new Model({
+    name: req.body.name,
+    age: req.body.age,
+  })
+  res.send("Post API");
+});
+
+// GET ALL
+router.get('/getAll', (req, res) => {
+  res.send('Get ALL API');
+});
+
+// GET by ID
+router.get('/getOne/:id', (req, res) => {
+  res.send(req.params.id);
+});
+
+// UPDATE by ID
+router.patch('/update/:id', (req, res) => {
+  res.send('Update by ID API');
+});
+
+// DELETE by ID
+router.delete('/delete/:id', (req, res) => {
+  res.send('Delete by ID API');
+});
+
+module.exports = router;
