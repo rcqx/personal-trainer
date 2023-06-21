@@ -1,5 +1,7 @@
 import { MdOutlineAdd } from "react-icons/md";
+import axios from "axios";
 import { useState } from "react";
+import { bodyComp1, bodyComp2, FG } from "../../pages/mock";
 
 const CreateWorkout = () => {
   const [planName, setPlanName] = useState("");
@@ -13,21 +15,33 @@ const CreateWorkout = () => {
     } else if (e.target.id === "objective") {
       setObjective(e.target.value);
     } else if (e.target.id === "bodyComposition") {
-      setBodyComposition(e.target.value);
-    } else {
-      setFitnessGoal(e.target.value);
+      setBodyComposition(bodyComp1.bodyComposition);
+    } else if (e.target.id === "fitnessGoal") {
+      setFitnessGoal(FG.fitnessGoal);
     }
   };
 
-  const handleFormSubmission = (e) => {
+  const handleFormSubmission = async (e) => {
     e.preventDefault();
-    const formValues = {
+    const URL = "http://localhost:8080/api/create-workout";
+    const formData = {
       planName,
       objective,
       bodyComposition,
       fitnessGoal,
+      status: "new",
+    };
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const response = await axios.post(URL, formData, config);
+    } catch (error) {
+      console.log(error);
     }
-    console.log(formValues);
   };
 
   return (
