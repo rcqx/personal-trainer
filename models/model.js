@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const dataSchema = new mongoose.Schema({
   name: {
-    require: true,
     type: String,
+    required: true,
   },
   age: {
-    required: true,
     type: Number,
+    required: true,
   },
 });
 
