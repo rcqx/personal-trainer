@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const FormSchema = new mongoose.Schema({
-  name: {
+  planName: {
     type: String,
     required: true,
   },

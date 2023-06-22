@@ -21,7 +21,7 @@ router.post('/post', async (req, res) => {
 // TEST
 router.post('/create-workout', async (req, res) => {
   const data = new FormModel({
-    name: req.body.name,
+    planName: req.body.planName,
     objective: req.body.objective,
     bodyComposition: req.body.bodyComposition,
     fitnessGoal: req.body.fitnessGoal,
