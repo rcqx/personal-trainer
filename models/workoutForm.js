@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const FormSchema = new mongoose.Schema({
   planName: {
     type: String,
@@ -33,4 +34,6 @@ const FormSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('workoutForm', FormSchema);
+const FormModel = mongoose.model('workoutForm', FormSchema);
+
+export default FormModel;

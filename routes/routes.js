@@ -1,7 +1,16 @@
-const express = require("express");
+import express from 'express'
+import OpenAiProvider from "../provider/provider.js";
+import OpenAiService from "../services/service.js";
+import OpenAiController from "../controllers/controller.js";
+import FormModel from "../models/workoutForm.js"
+
 const router = express.Router();
-const Model = require('../models/model');
-const FormModel = require('../models/workoutForm');
+const provider = new OpenAiProvider(
+  "apikey",
+  "model"
+);
+const service = new OpenAiService(provider);
+const controller = new OpenAiController(service);
 
 // POST
 router.post('/post', async (req, res) => {
@@ -56,4 +65,7 @@ router.delete('/delete/:id', (req, res) => {
   res.send('Delete by ID API');
 });
 
-module.exports = router;
+// openai test endpoint
+router.post('/generate-text', controller.generateText);
+
+export default router;

@@ -1,11 +1,12 @@
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import router from './routes/routes.js';
+import dotenv from 'dotenv'
 
-const express = require('express');
-// const cors = require('express-cors');
-const cors = require('cors');
+dotenv.config();
 const app = express();
 app.use(cors());
-const mongoose = require('mongoose');
 const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
 const database = mongoose.connection;
@@ -19,13 +20,11 @@ database.once('connected', () => {
 })
 
 const PORT = 8080;
-const routes = require('./routes/routes');
 
 app.use(express.json());
-app.use('/api', routes);
+app.use('/api', router);
 app.use(express.urlencoded({ extended: true }));
 app.listen(PORT || 8081, () => {
   console.log(`Server Started at ${PORT}`);
 });
-
 
