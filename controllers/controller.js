@@ -11,7 +11,7 @@ class OpenAiController {
       res.json({ generatedText });
     } catch (error) {
       console.error("Error:", error);
-      res.status(500).json({ error: "An error ocurred" });
+      res.status(500).json({ error: "An error ocurred. More info on response.data.error" });
     }
   };
 }

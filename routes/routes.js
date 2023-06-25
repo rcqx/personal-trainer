@@ -1,13 +1,15 @@
-import express from 'express'
+import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
 import OpenAiProvider from "../provider/provider.js";
 import OpenAiService from "../services/service.js";
 import OpenAiController from "../controllers/controller.js";
-import FormModel from "../models/workoutForm.js"
+import FormModel from "../models/workoutForm.js";
 
 const router = express.Router();
 const provider = new OpenAiProvider(
-  "apikey",
-  "model"
+  process.env.OPEN_AI_MODEL,
+  process.env.OPEN_AI_KEY,
 );
 const service = new OpenAiService(provider);
 const controller = new OpenAiController(service);
@@ -28,7 +30,7 @@ router.post('/post', async (req, res) => {
 });
 
 // TEST
-router.post('/create-workout', async (req, res) => {
+router.post('/create-form', async (req, res) => {
   const data = new FormModel({
     planName: req.body.planName,
     objective: req.body.objective,

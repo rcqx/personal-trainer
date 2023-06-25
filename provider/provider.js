@@ -1,7 +1,7 @@
-import { Configuration, OpenAIApi } from "openai"
+import { Configuration, OpenAIApi } from "openai";
 
 class OpenAiProvider {
-  constructor(apiKey, model) {
+  constructor(model, apiKey) {
     this.apiKey = apiKey;
     this.model = model;
     this.configuration = new Configuration({
@@ -15,7 +15,7 @@ class OpenAiProvider {
       const response = await this.client.createCompletion({
         model: this.model,
         prompt,
-        maxTokens,
+        max_tokens: maxTokens,
       });
 
       const generateText = response.data.choices[0].text.trim();
