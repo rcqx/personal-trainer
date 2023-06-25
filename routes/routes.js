@@ -5,6 +5,7 @@ import OpenAiProvider from "../provider/provider.js";
 import OpenAiService from "../services/service.js";
 import OpenAiController from "../controllers/controller.js";
 import FormModel from "../models/workoutForm.js";
+import InputModel from '../models/inputs.js';
 
 const router = express.Router();
 const provider = new OpenAiProvider(
@@ -29,7 +30,6 @@ router.post('/post', async (req, res) => {
   }
 });
 
-// TEST
 router.post('/create-form', async (req, res) => {
   const data = new FormModel({
     planName: req.body.planName,
@@ -37,6 +37,26 @@ router.post('/create-form', async (req, res) => {
     bodyComposition: req.body.bodyComposition,
     fitnessGoal: req.body.fitnessGoal,
     status: req.body.status,
+  });
+
+  try {
+    const dataToSave = await data.save();
+    res.status(200).json(dataToSave);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.post('/body-composition', async (req, res) => {
+  const data = new InputModel({
+    age: req.body.age,
+    weight: req.body.weight,
+    height: req.body.height,
+    bodyFat: req.body.bodyFat,
+    lbm: req.body.lbm,
+    bmi: req.body.bmi,
+    waist: req.body.waist,
+    bodytype: req.body.bodytype,
   });
 
   try {
