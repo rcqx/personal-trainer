@@ -1,7 +1,6 @@
 import express from 'express';
-import dotenv from 'dotenv';
-dotenv.config();
-import OpenAiProvider from "../provider/provider.js";
+import config from '../config/config.js';
+import OpenAiProvider from "../providers/provider.js";
 import OpenAiService from "../services/service.js";
 import OpenAiController from "../controllers/controller.js";
 import FormModel from "../models/workoutForm.js";
@@ -10,8 +9,8 @@ import goalsModel from '../models/goals.js';
 
 const router = express.Router();
 const provider = new OpenAiProvider(
-  process.env.OPEN_AI_MODEL,
-  process.env.OPEN_AI_KEY,
+  config.llm.model,
+  config.llm.apikey,
 );
 const service = new OpenAiService(provider);
 const controller = new OpenAiController(service);
