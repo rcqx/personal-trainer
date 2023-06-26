@@ -1,6 +1,6 @@
 import { MdOutlineAdd } from "react-icons/md";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { bodyComp1, bodyComp2, FG } from "../../pages/mock";
 
 const CreateWorkout = () => {
@@ -8,6 +8,22 @@ const CreateWorkout = () => {
   const [objective, setObjective] = useState("");
   const [bodyComposition, setBodyComposition] = useState("");
   const [fitnessGoal, setFitnessGoal] = useState("");
+  const [allCompositions, setAllCompositions] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/getAllCompositions");
+        setAllCompositions(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  // console.log(allCompositions);
 
   const handleFormChange = (e) => {
     if (e.target.id === "planName") {
@@ -72,14 +88,19 @@ const CreateWorkout = () => {
             id="bodyComposition"
             className="p-2 bg-white border border-slate-200 rounded-md"
             defaultValue="body composition 1"
+            onChange={(e) => console.log(e.target.value)}
           >
-            <option label="Body Composition 1" value="body composition 1" />
-            <option label="Body Composition 2" value="body composition 2" />
+            {allCompositions.map((item, index) => {
+              return <option label={`Body Composition ${index + 1}`} value={item.id} />
+            })}
           </select>
         </div>
         <div className="flex flex-col mb-3">
           <label className="text-start pb-1 text-sm">Fitness Goal</label>
-          <select id="fitnessGoal" className="p-2 bg-white border border-slate-200 rounded-md">
+          <select
+            id="fitnessGoal"
+            className="p-2 bg-white border border-slate-200 rounded-md"
+          >
             <option>Goals option 1</option>
             <option>Goals option 2</option>
           </select>      </div>
