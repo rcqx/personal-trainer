@@ -4,7 +4,9 @@ const LandingNav = () => (
   <nav className="flex h-[7em] justify-between items-center m-[0_auto] max-w-7xl">
     <Link to="/">
       <h1 className="font-[Newsreader] text-5xl text-blue-600 antialiased cursor-pointer">
-        FitSmart
+        Personal Tr
+        <span className="text-slate-800">ai</span>
+        ner
       </h1>
     </Link>
     <ul className="w-1/3 flex justify-between items-center">

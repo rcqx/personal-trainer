@@ -9,7 +9,7 @@
 
 - React
 - Redux
-- openai API
+- TailwindCSS
 
 ## Live Demo (if available)
 

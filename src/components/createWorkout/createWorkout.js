@@ -38,7 +38,7 @@ const CreateWorkout = () => {
     };
 
     try {
-      const response = await axios.post(URL, formData, config);
+      await axios.post(URL, formData, config);
     } catch (error) {
       console.log(error);
     }
