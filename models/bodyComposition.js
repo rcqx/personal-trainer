@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const InputSchema = new mongoose.Schema({
+const bodyCompositionSchema = new mongoose.Schema({
   age: {
     type: Number,
     required: true,
@@ -32,5 +32,5 @@ const InputSchema = new mongoose.Schema({
   }
 });
 
-const InputModel = mongoose.model('inputModel', InputSchema);
-export default InputModel;
+const bodyCompositionModel = mongoose.model('inputModel', bodyCompositionSchema);
+export default bodyCompositionModel;
