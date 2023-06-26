@@ -1,5 +1,6 @@
 import express from 'express';
 import config from '../config/config.js';
+import { v4 as uuidv4 } from 'uuid';
 import OpenAiProvider from "../providers/provider.js";
 import OpenAiService from "../services/service.js";
 import OpenAiController from "../controllers/controller.js";
@@ -14,6 +15,20 @@ const provider = new OpenAiProvider(
 );
 const service = new OpenAiService(provider);
 const controller = new OpenAiController(service);
+
+
+//GET body compositions
+router.get('/getAllCompositions', (req, res) => {
+  const getItems = async () => {
+    const Items = await bodyCompositionModel.find({});
+    return Items;
+  };
+  getItems().then((data) => {
+    res.status(200).json(data);
+  }).catch((err) => {
+    res.status(400).json({ message: err.message });
+  });
+});
 
 // POST
 router.post('/post', async (req, res) => {
@@ -49,6 +64,7 @@ router.post('/create-form', async (req, res) => {
 
 router.post('/body-composition', async (req, res) => {
   const data = new bodyCompositionModel({
+    id: uuidv4(),
     age: req.body.age,
     weight: req.body.weight,
     height: req.body.height,
@@ -89,7 +105,7 @@ router.post('/goals', async (req, res) => {
 
 // GET ALL
 router.get('/getAll', (req, res) => {
-  res.send('Get ALL API');
+  res.json('Get ALL API');
 });
 
 // GET by ID
