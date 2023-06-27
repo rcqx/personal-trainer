@@ -9,21 +9,33 @@ const CreateWorkout = () => {
   const [bodyComposition, setBodyComposition] = useState("");
   const [fitnessGoal, setFitnessGoal] = useState("");
   const [allCompositions, setAllCompositions] = useState([]);
+  const [allGoals, setAllGoals] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/getAllCompositions");
+        const response = await axios.get("http://localhost:8080/api/get-all-compositions");
         setAllCompositions(response.data);
       } catch (error) {
         console.log(error);
       }
-    }
+    };
 
     fetchData();
   }, []);
 
-  // console.log(allCompositions);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/get-all-goals")
+        setAllGoals(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleFormChange = (e) => {
     if (e.target.id === "planName") {
@@ -91,7 +103,7 @@ const CreateWorkout = () => {
             onChange={(e) => console.log(e.target.value)}
           >
             {allCompositions.map((item, index) => {
-              return <option label={`Body Composition ${index + 1}`} value={item.id} />
+              return <option key={index} label={`Body Composition ${index + 1}`} value={item.id} />
             })}
           </select>
         </div>
@@ -100,9 +112,11 @@ const CreateWorkout = () => {
           <select
             id="fitnessGoal"
             className="p-2 bg-white border border-slate-200 rounded-md"
+            onChange={(e) => console.log(e.target.value)}
           >
-            <option>Goals option 1</option>
-            <option>Goals option 2</option>
+            {allGoals.map((item, index) => {
+              return <option key={index} label={`Goal ${index + 1}`} value={item.id} />
+            })}
           </select>      </div>
         <div className="mt-4 flex justify-end">
           <button
