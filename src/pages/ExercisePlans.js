@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import cardio from "../assets/cardio.jpg"
 import strength from "../assets/weights.jpg"
 import multi from "../assets/crossfit.jpg"
@@ -7,10 +8,26 @@ import Modal from "../components/createWorkout/modal";
 
 const ExercisePlans = () => {
   const [modal, setModal] = useState(false);
+  const [plans, setPlans] = useState([]);
 
   const showModal = () => {
     setModal(true);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/get-exercise-forms");
+        setPlans(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(plans);
 
   return (
     <div className="flex flex-col justify-between">
@@ -29,30 +46,18 @@ const ExercisePlans = () => {
         <div>
           <h2 className="text-start text-lg font-semibold py-5">Routines (1)</h2>
           <div className="workout-cards py-2 flex justify-between items-center gap-5 mb-20">
-            <div className="w-1/3 border border-slate-200 shadow-md rounded-3xl overflow-hidden cursor-pointer">
-              <img src={cardio} alt="thumbnail" />
-              <div className="px-4 py-6 bg-[#FAFAF5]">
-                <h3 className="text-start font-semibold">Marathon Prep Plan 2023</h3>
-                <h3 className="text-start font-semibold text-green-700">Completed</h3>
-                <p className="text-start text-sm text-slate-600">Improve Cardiovascular performance</p>
-              </div>
-            </div>
-            <div className="w-1/3 border border-slate-200 shadow-md rounded-3xl overflow-hidden cursor-pointer">
-              <img src={strength} alt="thumbnail" />
-              <div className="px-4 py-6 bg-[#FAFAF5]">
-                <h3 className="text-start font-semibold">Hypertrophy Fall-Summer Plan 2023</h3>
-                <h3 className="text-start font-semibold text-amber-600">In progress</h3>
-                <p className="text-start text-sm text-slate-600">Increase mass and strength</p>
-              </div>
-            </div>
-            <div className="w-1/3 border border-slate-200 shadow-md rounded-3xl overflow-hidden cursor-pointer">
-              <img src={multi} alt="thumbnail" />
-              <div className="px-4 py-6 bg-[#FAFAF5]">
-                <h3 className="text-start font-semibold">Cutting Summer Plan 2023</h3>
-                <h3 className="text-start font-semibold text-blue-600">Start</h3>
-                <p className="text-start text-sm text-slate-600">Lower body fat percetage</p>
-              </div>
-            </div>
+            {plans.map((item) => {
+              return (
+                <div className="w-1/3 border border-slate-200 shadow-md rounded-3xl overflow-hidden cursor-pointer">
+                  <img src={cardio} alt="thumbnail" />
+                  <div className="px-4 py-6 bg-[#FAFAF5]">
+                    <h3 className="text-start font-semibold">{item.planName}</h3>
+                    <h3 className="text-start font-semibold text-green-700">{item.status[0].toUpperCase() + item.status.slice(1)}</h3>
+                    <p className="text-start text-sm text-slate-600">{item.objective[0].toUpperCase() + item.objective.slice(1)}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

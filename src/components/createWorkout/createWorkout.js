@@ -171,7 +171,7 @@ const CreateWorkout = () => {
               hover:bg-blue-800 flex justify-center items-center"
             onClick={(e) => {
               handleFormSubmission(e);
-              createWorkout(bodyComposition, fitnessGoal);
+              // createWorkout(bodyComposition, fitnessGoal);
             }}
           >
             <MdOutlineAdd className="mr-1" />
