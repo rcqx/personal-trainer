@@ -16,8 +16,8 @@ const provider = new OpenAiProvider(
 const service = new OpenAiService(provider);
 const controller = new OpenAiController(service);
 
-//GET body compositions
-router.get('/getAllCompositions', (req, res) => {
+// GET body compositions
+router.get('/get-all-compositions', (req, res) => {
   const getItems = async () => {
     const Items = await bodyCompositionModel.find({});
     return Items;
@@ -29,23 +29,35 @@ router.get('/getAllCompositions', (req, res) => {
   });
 });
 
-// POST
-router.post('/post', async (req, res) => {
-  const data = new Model({
-    name: req.body.name,
-    age: req.body.age
+// GET created goals
+router.get('/get-all-goals', (req, res) => {
+  const getItems = async () => {
+    const Items = await goalsModel.find({});
+    return Items;
+  };
+  getItems().then((data) => {
+    res.status(200).json(data);
+  }).catch((err) => {
+    res.status(400).json(({ message: err.message }));
   })
+})
 
-  try {
-    const dataToSave = await data.save();
-    res.status(200).json(dataToSave);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+// Get created exercise plans
+router.get('/get-exercise-forms', (req, res) => {
+  const getItems = async () => {
+    const Items = await FormModel.find({});
+    return Items;
+  };
+  getItems().then((data) => {
+    res.status(200).json(data);
+  }).catch((err) => {
+    res.status(400).json(({ message: err.message }));
+  });
 });
 
 router.post('/create-form', async (req, res) => {
   const data = new FormModel({
+    id: uuidv4(),
     planName: req.body.planName,
     objective: req.body.objective,
     bodyComposition: req.body.bodyComposition,
@@ -103,6 +115,10 @@ router.post('/create-goals', async (req, res) => {
   }
 });
 
+// openai test endpoint
+router.post('/generate-workout', controller.generateText);
+
+
 // GET ALL
 router.get('/getAll', (req, res) => {
   res.json('Get ALL API');
@@ -122,8 +138,5 @@ router.patch('/update/:id', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
   res.send('Delete by ID API');
 });
-
-// openai test endpoint
-router.post('/generate-text', controller.generateText);
 
 export default router;

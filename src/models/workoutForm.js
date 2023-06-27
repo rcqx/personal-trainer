@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
 const FormSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   planName: {
     type: String,
     required: true,

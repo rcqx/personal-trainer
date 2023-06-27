@@ -1,4 +1,4 @@
-import PromptModel from "../models/prompt.js";
+import WorkoutModel from "../models/workout.js";
 
 class OpenAiController {
   constructor(service) {
@@ -9,7 +9,7 @@ class OpenAiController {
     const { prompt, maxTokens } = req.body;
     try {
       const generatedText = await this.service.generateText(prompt, maxTokens);
-      const data = new PromptModel({
+      const data = new WorkoutModel({
         responseTest: generatedText,
       });
       const dataToSave = await data.save();
