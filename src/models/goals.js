@@ -1,7 +1,12 @@
 import mongoose from "mongoose";
 
 const goalsSchema = new mongoose.Schema({
-  trainningFocus: {
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  trainingFocus: {
     type: String,
     required: true,
   },

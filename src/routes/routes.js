@@ -16,7 +16,6 @@ const provider = new OpenAiProvider(
 const service = new OpenAiService(provider);
 const controller = new OpenAiController(service);
 
-
 //GET body compositions
 router.get('/getAllCompositions', (req, res) => {
   const getItems = async () => {
@@ -83,9 +82,10 @@ router.post('/body-composition', async (req, res) => {
   }
 });
 
-router.post('/goals', async (req, res) => {
+router.post('/create-goals', async (req, res) => {
   const data = new goalsModel({
-    trainningFocus: req.body.trainningFocus,
+    id: uuidv4(),
+    trainingFocus: req.body.trainingFocus,
     weight: req.body.weight,
     bodyFat: req.body.bodyFat,
     frequency: req.body.frequency,
