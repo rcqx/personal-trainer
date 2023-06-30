@@ -16,6 +16,20 @@ const provider = new OpenAiProvider(
 const service = new OpenAiService(provider);
 const controller = new OpenAiController(service);
 
+
+/**
+ * @swagger
+ * /get-all-compositions:
+ *   get:
+ *     summary: Get all compositions
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 // GET body compositions
 router.get('/get-all-compositions', (req, res) => {
   const getItems = async () => {

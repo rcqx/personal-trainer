@@ -18,6 +18,8 @@
     "express-cors": "^0.0.3",
     "mongoose": "^7.3.0",
     "openai": "^3.3.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
