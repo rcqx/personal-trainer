@@ -1,21 +1,20 @@
 import { MdOutlineAdd } from "react-icons/md";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { bodyComp1, bodyComp2, FG } from "../../pages/mock";
 
 const CreateWorkout = () => {
   const [planName, setPlanName] = useState("");
   const [objective, setObjective] = useState("");
-  const [bodyComposition, setBodyComposition] = useState("");
-  const [fitnessGoal, setFitnessGoal] = useState("");
-  const [allCompositions, setAllCompositions] = useState([]);
-  const [allGoals, setAllGoals] = useState([]);
+  const [bodyCompositions, setBodyCompositions] = useState([]);
+  const [bodyComposition, setBodyComposition] = useState([]);
+  const [fitnessGoals, setFitnessGoals] = useState([]);
+  const [fitnessGoal, setFitnessGoal] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/get-all-compositions");
-        setAllCompositions(response.data);
+        setBodyCompositions(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -28,7 +27,7 @@ const CreateWorkout = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/get-all-goals")
-        setAllGoals(response.data);
+        setFitnessGoals(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -42,21 +41,39 @@ const CreateWorkout = () => {
       setPlanName(e.target.value);
     } else if (e.target.id === "objective") {
       setObjective(e.target.value);
-    } else if (e.target.id === "bodyComposition") {
-      setBodyComposition(bodyComp1.bodyComposition);
-    } else if (e.target.id === "fitnessGoal") {
-      setFitnessGoal(FG.fitnessGoal);
+    } else if (e.target.id === "bodyComposition" && e.target.value !== "placeholder") {
+      setBodyComposition(bodyCompositions[0]);
+    } else if (e.target.id === "fitnessGoal" && e.target.value !== "placeholder") {
+      setFitnessGoal(fitnessGoals[0]);
     }
   };
 
-  const handleFormSubmission = async (e) => {
+  const handleFormSubmission = async (e, bodyComposition, fitnessGoal) => {
     e.preventDefault();
     const URL = "http://localhost:8080/api/create-form";
     const formData = {
       planName,
       objective,
-      bodyComposition,
-      fitnessGoal,
+      bodyComposition: {
+        age: bodyComposition.age,
+        weight: bodyComposition.weight,
+        height: bodyComposition.height,
+        bodyFat: bodyComposition.bodyFat,
+        lbm: bodyComposition.lbm,
+        bmi: bodyComposition.bmi,
+        waist: bodyComposition.waist,
+        bodyType: bodyComposition.bodytype,
+      },
+      fitnessGoal: {
+        trainingFocus: fitnessGoal.trainingFocus,
+        weight: fitnessGoal.weight,
+        bodyFat: fitnessGoal.bodyFat,
+        frequency: fitnessGoal.frequency,
+        lbm: fitnessGoal.lbm,
+        bmi: fitnessGoal.bmi,
+        flexibility: fitnessGoal.flexibility,
+        cardio: fitnessGoal.cardio,
+      },
       status: "new",
     };
     const config = {
@@ -74,10 +91,11 @@ const CreateWorkout = () => {
 
   const createWorkout = async (bodyComposition, fitnessGoal) => {
     // e.preventDefault();
+    console.log("before");
     const URL = "http://localhost:8080/api/generate-workout";
     const formData = {
       prompt: `Act as a training coach. Suggest exercises according to the user's input information and desired output goals. 
-      Provide an exercise routine following user's input and goals parameters. Create a schedule based on user's Frequency which unit are days per week.
+      Provide a detailed exercise routine following user's input and goals parameters. Create a schedule based on user's Frequency which unit is days per week.
       To do this, use the following data:
       inputs:
       age: ${bodyComposition.age},
@@ -100,9 +118,9 @@ const CreateWorkout = () => {
       cardio: ${fitnessGoal.cardio}
       
       Deliver to the user the following:
+      Specific exercises and the actual name of the exercise.
       Create a detailed description of the suggested exercise plan according to the user’s input parameters and output goals.
       If the cardio value equals true suggest a cardio session at the end of every training session.
-      Avoid any superfluous pre and post-descriptive text. 
       `,
       maxTokens: 1000,
     }
@@ -113,8 +131,10 @@ const CreateWorkout = () => {
     };
 
     try {
+      console.log("inside try");
       await axios.post(URL, formData, config);
     } catch (error) {
+      console.log("inside error");
       console.log(error);
     }
   };
@@ -123,7 +143,9 @@ const CreateWorkout = () => {
     <div className="flex justify-center items-center" >
       <form
         className="w-full rounded-md flex flex-col justify-around"
-        onChange={(e) => handleFormChange(e)}
+        onChange={(e) => {
+          handleFormChange(e)
+        }}
       >
         <div className="flex flex-col mb-3">
           <label className="text-start text-sm pb-1">Name</label>
@@ -147,11 +169,9 @@ const CreateWorkout = () => {
             id="bodyComposition"
             className="p-2 bg-white border border-slate-200 rounded-md"
             defaultValue="body composition 1"
-            onChange={(e) => console.log(e.target.value)}
           >
-            {allCompositions.map((item, index) => {
-              return <option key={index} label={`Body Composition ${index + 1}`} value={item.id} />
-            })}
+            <option label="Select your current composition" value="placeholder" />
+            <option label={`Initial Body Composition`} value={bodyComposition} />
           </select>
         </div>
         <div className="flex flex-col mb-3">
@@ -159,19 +179,17 @@ const CreateWorkout = () => {
           <select
             id="fitnessGoal"
             className="p-2 bg-white border border-slate-200 rounded-md"
-            onChange={(e) => console.log(e.target.value)}
           >
-            {allGoals.map((item, index) => {
-              return <option key={index} label={`Goal ${index + 1}`} value={item.id} />
-            })}
+            <option label="Select a goal" value="placeholder" />
+            <option label={`Initial Goal`} value={fitnessGoal} />
           </select>      </div>
         <div className="mt-4 flex justify-end">
           <button
             className="font-[Inter] border border-blue-600 py-2 px-8 rounded-md bg-blue-600 text-white 
               hover:bg-blue-800 flex justify-center items-center"
             onClick={(e) => {
-              handleFormSubmission(e);
-              // createWorkout(bodyComposition, fitnessGoal);
+              handleFormSubmission(e, bodyComposition, fitnessGoal);
+              createWorkout(bodyComposition, fitnessGoal);
             }}
           >
             <MdOutlineAdd className="mr-1" />
