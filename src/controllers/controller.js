@@ -15,7 +15,7 @@ class OpenAiController {
       const dataToSave = await data.save();
       res.status(200).json(dataToSave);
     } catch (error) {
-      console.error("Error:", error);
+      console.error(error);
       res.status(500).json({ error: "An error ocurred. More info on response.data.error" });
     }
   };

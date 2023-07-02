@@ -1,5 +1,4 @@
 import { Configuration, OpenAIApi } from "openai";
-import { v4 as uuidv4 } from 'uuid';
 
 class OpenAiProvider {
   constructor(model, apiKey) {
@@ -14,7 +13,6 @@ class OpenAiProvider {
   async generateText(prompt, maxTokens = 100) {
     try {
       const response = await this.client.createCompletion({
-        id: uuidv4(),
         model: this.model,
         prompt,
         max_tokens: maxTokens,
