@@ -1,6 +1,7 @@
 import { MdOutlineAdd } from "react-icons/md";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { BiLoaderAlt } from "react-icons/bi";
 
 const CreateWorkout = () => {
   const [planName, setPlanName] = useState("");
@@ -9,6 +10,7 @@ const CreateWorkout = () => {
   const [bodyComposition, setBodyComposition] = useState([]);
   const [fitnessGoals, setFitnessGoals] = useState([]);
   const [fitnessGoal, setFitnessGoal] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +52,7 @@ const CreateWorkout = () => {
 
   const handleFormSubmission = async (e, bodyComposition, fitnessGoal) => {
     e.preventDefault();
+    setLoading(true);
     const URL = "http://localhost:8080/api/create-form";
     const formData = {
       planName,
@@ -132,7 +135,7 @@ const CreateWorkout = () => {
 
     try {
       console.log("inside try");
-      await axios.post(URL, formData, config);
+      await axios.post(URL, formData, config).then(() => setLoading(false));
     } catch (error) {
       console.log("inside error");
       console.log(error);
@@ -192,8 +195,13 @@ const CreateWorkout = () => {
               createWorkout(bodyComposition, fitnessGoal);
             }}
           >
-            <MdOutlineAdd className="mr-1" />
-            Create Plan
+            {loading ?
+              (<BiLoaderAlt size={30} className="animate-spin" />)
+              :
+              (<>
+                <MdOutlineAdd className="mr-1" />
+                <h1>Create Plan</h1>
+              </>)}
           </button>
         </div>
       </form>
