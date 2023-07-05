@@ -5,6 +5,7 @@ import strength from "../assets/weights.jpg"
 import multi from "../assets/crossfit.jpg"
 import { AiOutlineFileAdd } from "react-icons/ai";
 import Modal from "../components/createWorkout/modal";
+import { getWorkOutForm } from "../api/exceriseForm";
 
 const ExercisePlans = () => {
   const [modal, setModal] = useState(false);
@@ -17,7 +18,7 @@ const ExercisePlans = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/get-exercise-forms");
+        const response = await getWorkOutForm();
         setPlans(response.data);
       } catch (err) {
         console.log(err);

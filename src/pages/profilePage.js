@@ -3,6 +3,9 @@ import axios from "axios";
 import profilePicture from "../assets/profile.jpg";
 import { BiLoaderAlt } from "react-icons/bi";
 
+import { getBodyComposition } from "../api/bodyComposition";
+import { getGoals } from "../api/goal";
+
 const ProfilePage = () => {
   const [compositions, setCompositions] = useState([]);
   const [loader1, setLoader1] = useState(true);
@@ -11,14 +14,12 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const URL1 = "http://localhost:8080/api/get-all-compositions";
-      axios.get(URL1).then((res) => {
+      getBodyComposition().then((res) => {
         setCompositions(res.data)
         setLoader1(false);
       });
 
-      const URL2 = "http://localhost:8080/api/get-all-goals";
-      axios.get(URL2).then((res) => {
+      getGoals().then((res) => {
         setGoals(res.data)
         setLoader2(false);
       });
