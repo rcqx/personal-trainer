@@ -3,7 +3,7 @@ import config from './src/config/config.js';
 import cors from 'cors';
 import router from './src/routes/routes.js';
 import mongoose from 'mongoose';
-import swaggerJSDoc from 'swagger-jsdoc';
+
 import swaggerUi from 'swagger-ui-express';
 import docs from './src/docs/index.js';
 
@@ -18,23 +18,6 @@ database.on('error', (error) => {
 database.once('connected', () => {
   console.log('Database Connected');
 })
-
-// Swagger configuration options
-const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Personal Trainer API',
-      version: '1.0.0',
-      description: 'API documentation for Personal Trainer application',
-    },
-  },
-  // API files path
-  apis: ['./src/routes/*.js'],
-};
-
-// Initialize swagger-jsdoc
-const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
 // Serve Swagger API documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(docs));
