@@ -1,4 +1,4 @@
-import bodyCompositionComponent from "./components/bodyCompositionComponent.js";
+import bodyCompositionComponent from "./bodyCompositionComponent.js";
 
 const components = {
   components: {

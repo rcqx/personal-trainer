@@ -37,8 +37,7 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
 // Serve Swagger API documentation
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use('/api-docs-1', swaggerUi.serve, swaggerUi.setup(docs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(docs));
 
 app.use(express.json());
 app.use('/api', router);
