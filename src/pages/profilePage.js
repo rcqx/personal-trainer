@@ -5,6 +5,9 @@ import { BiLoaderAlt } from "react-icons/bi";
 import BodyCompositionTable from "../components/bodyCompositionTable/bodyCompositionTable";
 import UpdateModal from "../components/updateModal/updateModal";
 
+import { getBodyComposition } from "../api/bodyComposition";
+import { getGoals } from "../api/goal";
+
 const ProfilePage = () => {
   const [compositions, setCompositions] = useState([]);
   const [bcModal, setBcModal] = useState(false);
@@ -13,16 +16,14 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const URL1 = "http://localhost:8080/api/get-all-compositions";
-      axios.get(URL1).then((res) => {
-        setCompositions(res.data);
-        setLoader(false);
+      getBodyComposition().then((res) => {
+        setCompositions(res.data)
+        setLoader1(false);
       });
 
-      const URL2 = "http://localhost:8080/api/get-all-goals";
-      axios.get(URL2).then((res) => {
-        setGoals(res.data);
-        setLoader(false);
+      getGoals().then((res) => {
+        setGoals(res.data)
+        setLoader2(false);
       });
     };
 
