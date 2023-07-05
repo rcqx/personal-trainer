@@ -3,6 +3,7 @@ import axios from "axios";
 import profilePicture from "../assets/profile.jpg";
 import { BiLoaderAlt } from "react-icons/bi";
 import BodyCompositionTable from "../components/bodyCompositionTable/bodyCompositionTable";
+import UpdateModal from "../components/updateModal/updateModal";
 
 const ProfilePage = () => {
   const [compositions, setCompositions] = useState([]);
@@ -116,6 +117,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
+      {bcModal && <UpdateModal bcModal={bcModal} setBcModal={setBcModal} />}
     </div>
   );
 };
