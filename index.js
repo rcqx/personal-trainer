@@ -5,6 +5,7 @@ import router from './src/routes/routes.js';
 import mongoose from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import docs from './src/docs/index.js';
 
 const app = express();
 app.use(cors());
@@ -37,6 +38,7 @@ const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
 // Serve Swagger API documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs-1', swaggerUi.serve, swaggerUi.setup(docs));
 
 app.use(express.json());
 app.use('/api', router);
