@@ -8,6 +8,10 @@ const tags = {
         name: "Goals",
         description: "Operations related to goals"
       },
+      {
+        name: "Workout Form",
+        description: "Operations related to workout"
+      },
     ],
   };
 
