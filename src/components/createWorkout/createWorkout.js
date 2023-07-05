@@ -3,6 +3,10 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
 
+import { createWorkouttForm, generateWorkout } from "../../api/exceriseForm";
+import { getBodyComposition } from "../../api/bodyComposition";
+import { getGoals } from "../../api/goal";
+
 const CreateWorkout = () => {
   const [planName, setPlanName] = useState("");
   const [objective, setObjective] = useState("");
@@ -15,7 +19,7 @@ const CreateWorkout = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/get-all-compositions");
+        const response = await getBodyComposition();
         setBodyCompositions(response.data);
       } catch (error) {
         console.log(error);
@@ -28,7 +32,7 @@ const CreateWorkout = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/get-all-goals")
+        const response = await getGoals()
         setFitnessGoals(response.data);
       } catch (error) {
         console.log(error);
@@ -53,7 +57,6 @@ const CreateWorkout = () => {
   const handleFormSubmission = async (e, bodyComposition, fitnessGoal) => {
     e.preventDefault();
     setLoading(true);
-    const URL = "http://localhost:8080/api/create-form";
     const formData = {
       planName,
       objective,
@@ -86,7 +89,7 @@ const CreateWorkout = () => {
     };
 
     try {
-      await axios.post(URL, formData, config);
+      await createWorkouttForm(formData);
     } catch (error) {
       console.log(error);
     }
@@ -95,7 +98,6 @@ const CreateWorkout = () => {
   const createWorkout = async (bodyComposition, fitnessGoal) => {
     // e.preventDefault();
     console.log("before");
-    const URL = "http://localhost:8080/api/generate-workout";
     const formData = {
       prompt: `Act as a training coach. Suggest exercises according to the user's input information and desired output goals. 
       Provide a detailed exercise routine following user's input and goals parameters. Create a schedule based on user's Frequency which unit is days per week.
@@ -135,7 +137,7 @@ const CreateWorkout = () => {
 
     try {
       console.log("inside try");
-      await axios.post(URL, formData, config).then(() => setLoading(false));
+      await generateWorkout(formData).then(() => setLoading(false));
     } catch (error) {
       console.log("inside error");
       console.log(error);
