@@ -29,8 +29,6 @@ const ProfilePage = () => {
     fetchData();
   }, []);
 
-  console.log(bcModal);
-
   return (
     <div className="flex flex-col justify-between mt-10 mb-20">
       <div className="justify-between items-center m-[0_auto] max-w-7xl w-full">

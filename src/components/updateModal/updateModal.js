@@ -1,5 +1,5 @@
 import { IoMdClose } from "react-icons/io";
-import { GrUpdate } from "react-icons/gr";
+import { RxUpdate } from "react-icons/rx";
 
 const UpdateModal = ({ bcModal, setBcModal }) => {
   return (
@@ -56,7 +56,7 @@ const UpdateModal = ({ bcModal, setBcModal }) => {
           />
         </div>
         <button className="rounded-lg py-2 bg-blue-600 text-white flex justify-center items-center">
-          <GrUpdate size={15} className="mr-2" />
+          <RxUpdate size={20} className="mr-3" />
           Update Body Composition
         </button>
       </form>
