@@ -12,7 +12,7 @@ export const getWorkoutForm = {
               schema: {
                 type: "array",
                 items: {
-                  $ref: "#/components/schemas/Form",
+                  $ref: "#/components/schemas/WorkoutForm",
                 },
               },
             },
