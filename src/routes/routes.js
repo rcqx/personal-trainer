@@ -7,6 +7,7 @@ import OpenAiController from "../controllers/controller.js";
 import FormModel from "../models/workoutForm.js";
 import bodyCompositionModel from "../models/bodyComposition.js";
 import goalsModel from "../models/goals.js";
+import MealPlanModel from "../models/mealPlan.js";
 
 const router = express.Router();
 const provider = new OpenAiProvider(config.llm.model, config.llm.apikey);
@@ -83,6 +84,44 @@ router.post("/create-form", async (req, res) => {
   }
 });
 
+// Meal Plan routes
+
+router.get("/get-mealplan", (req, res) => {
+  const getItems = async () => {
+    const Items = await MealPlanModel.find({});
+    return Items;
+  };
+  getItems()
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ message: err.message });
+    });
+});
+
+
+router.post("/create-mealplan", async (req, res) => {
+  const data = new MealPlanModel({
+    id: uuidv4(),
+    planName: req.body.planName,
+    objective: req.body.objective,
+    bodyComposition: req.body.bodyComposition,
+    fitnessGoal: req.body.fitnessGoal,
+    excercisePlan: req.body.excercisePlan,
+    status: req.body.status,
+  });
+
+  try {
+    const dataToSave = await data.save();
+    res.status(200).json(dataToSave);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+
+
 
 router.post("/body-composition", async (req, res) => {
   const data = new bodyCompositionModel({
@@ -129,6 +168,8 @@ router.post("/create-goals", async (req, res) => {
 
 // openai test endpoint
 router.post("/generate-workout", controller.generateText);
+
+router.post("/generate-mealplan", controller.generateText);
 
 // GET ALL
 router.get("/getAll", (req, res) => {
