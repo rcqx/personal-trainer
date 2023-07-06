@@ -130,6 +130,8 @@ router.post("/create-goals", async (req, res) => {
 // openai test endpoint
 router.post("/generate-workout", controller.generateText);
 
+router.post("/generate-mealplan", controller.generateText);
+
 // GET ALL
 router.get("/getAll", (req, res) => {
   res.json("Get ALL API");
