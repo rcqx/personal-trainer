@@ -1,7 +1,7 @@
 import { IoMdClose } from "react-icons/io";
 import { RxUpdate } from "react-icons/rx";
 
-const UpdateModal = ({ bcModal, setBcModal }) => {
+const UpdateCompositionModal = ({ bcModal, setBcModal }) => {
   return (
     <div className="border border-slate-200 shadow-lg w-1/3 h-2/3 rounded-xl flex justify-center bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <form className="w-full p-10 flex flex-col justify-between">
@@ -64,4 +64,4 @@ const UpdateModal = ({ bcModal, setBcModal }) => {
   );
 };
 
-export default UpdateModal;
+export default UpdateCompositionModal;
