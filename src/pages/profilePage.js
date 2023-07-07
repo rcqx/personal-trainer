@@ -4,8 +4,9 @@ import profilePicture from "../assets/profile.jpg";
 import { BiLoaderAlt } from "react-icons/bi";
 import BodyCompositionTable from "../components/bodyCompositionTable/bodyCompositionTable";
 import GoalsTable from "../components/goalsTable/goalsTable";
-import UpdateModal from "../components/updateModal/updateModal";
 import { getBodyComposition } from "../api/bodyComposition";
+import UpdateCompositionModal from "../components/updateModals/updateCompositionModal";
+import UpdateGoalsModal from "../components/updateModals/updateGoalsModal";
 import { getGoals } from "../api/goal";
 
 const ProfilePage = () => {
@@ -75,7 +76,8 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      {bcModal && <UpdateModal bcModal={bcModal} setBcModal={setBcModal} />}
+      {bcModal && <UpdateCompositionModal bcModal={bcModal} setBcModal={setBcModal} />}
+      {goalsModal && <UpdateGoalsModal goalsModal={goalsModal} setGoalsModal={setGoalsModal} />}
     </div>
   );
 };
