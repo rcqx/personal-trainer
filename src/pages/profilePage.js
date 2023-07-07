@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import ProfileCard from "../components/ProfileCard/ProfileCard";
 import profilePicture from "../assets/profile.jpg";
 import { BiLoaderAlt } from "react-icons/bi";
 import BodyCompositionTable from "../components/bodyCompositionTable/bodyCompositionTable";
@@ -39,17 +39,13 @@ const ProfilePage = () => {
           <h1 className="font-[Newsreader] text-5xl mb-2">Profile</h1>
         </div>
         <div id="profile" className="w-full mb-16 flex gap-5">
-          <div
-            id="profile-pic-container"
-            className="border border-slate-200 shadow-lg flex-1 rounded-lg overflow-hidden"
-          >
-            <img src={profilePicture} />
-            <div className="flex flex-col items-start p-3">
-              <h1 className="text-2xl">John Doe</h1>
-              <h2 className="text-xl text-green-700 font-semibold">85 kg</h2>
-              <h3 className="font-light text-sm">Calgary, AB, Canada</h3>
-            </div>
-          </div>
+          <ProfileCard
+            profilePicture={profilePicture}
+            name={"John Doe"}
+            weight={"85 Kg"}
+            height={"180 Cm"}
+            location={"Calgary, AB. Canada"}
+          />
           <div className="border border-slate-100 antialiased flex-1 flex flex-col justify-center items-center rounded-xl shadow-lg">
             {!loader ? (
               <BodyCompositionTable
