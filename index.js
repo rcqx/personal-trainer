@@ -29,3 +29,5 @@ app.listen(config.port, () => {
   console.log(`Server Started at ${config.port}`);
 });
 
+export default app;
+
