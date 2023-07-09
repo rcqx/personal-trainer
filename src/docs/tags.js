@@ -12,6 +12,10 @@ const tags = {
         name: "Workout Form",
         description: "Operations related to workout"
       },
+      {
+        name: "Meal Plan",
+        description: "Operations related to meal plan"
+      },
     ],
   };
 
