@@ -34,7 +34,7 @@ const MealPlanSchema = new mongoose.Schema({
     flexibility: { type: Boolean, required: true },
     cardio: { type: Boolean, required: true },
   },
-  excercisePlan: {
+  exercisePlan: {
     planName: { type: String, required: true }
   },
   status: {
