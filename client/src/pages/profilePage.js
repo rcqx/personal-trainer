@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ProfileCard from "../components/ProfileCard/ProfileCard";
+import ProfileCard from "../components/profileCard/profileCard";
 import profilePicture from "../assets/profile.jpg";
 import { BiLoaderAlt } from "react-icons/bi";
 import BodyCompositionTable from "../components/bodyCompositionTable/bodyCompositionTable";

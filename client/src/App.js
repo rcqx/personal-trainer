@@ -7,7 +7,8 @@ import LandingPage from './pages/LandingPage';
 import ProfilePage from './pages/profilePage';
 import ExercisePlans from './pages/ExercisePlans';
 import MealPlans from './pages/MealPlans';
-import Footer from './components/Footer';
+import NotFound from './components/notFound/notFound';
+import Footer from './components/footer';
 
 function App() {
   const user = true;
@@ -24,6 +25,7 @@ function App() {
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/exercise-plans' element={<ExercisePlans />} />
         <Route path='/meal-plans' element={<MealPlans />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>
