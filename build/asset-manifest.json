@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.910b59ff.css",
+    "main.js": "/static/js/main.10b83e08.js",
+    "static/media/profile.jpg": "/static/media/profile.3b183cbd6a0f15b341a8.jpg",
+    "static/media/crossfit.jpg": "/static/media/crossfit.13884fc402bcf4533c83.jpg",
+    "static/media/weights.jpg": "/static/media/weights.0335fdc70bbb6c975ea9.jpg",
+    "static/media/cardio.jpg": "/static/media/cardio.a9b7584e142a474cb9c9.jpg",
+    "static/media/herocover.jpg": "/static/media/herocover.a6eb2a56f57764a7eb92.jpg",
+    "index.html": "/index.html",
+    "main.910b59ff.css.map": "/static/css/main.910b59ff.css.map",
+    "main.10b83e08.js.map": "/static/js/main.10b83e08.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.910b59ff.css",
+    "static/js/main.10b83e08.js"
+  ]
+}
