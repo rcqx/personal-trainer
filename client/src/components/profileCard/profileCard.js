@@ -18,4 +18,3 @@ const ProfileCard = ({ profilePicture, name, weight, height, location }) => {
 };
 
 export default ProfileCard;
-
