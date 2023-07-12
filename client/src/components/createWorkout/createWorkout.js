@@ -1,5 +1,4 @@
 import { MdOutlineAdd } from "react-icons/md";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
 

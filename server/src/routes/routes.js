@@ -135,7 +135,6 @@ router.post("/body-composition", async (req, res) => {
   }
 });
 
-
 router.post("/create-goals", async (req, res) => {
   const data = new goalsModel({
     id: uuidv4(),
@@ -158,7 +157,7 @@ router.post("/create-goals", async (req, res) => {
 });
 
 //get workout
-router.get("/get-workouts", (req, res) => {
+router.get("/get-all-workouts", (req, res) => {
   const getItems = async () => {
     const Items = await WorkoutModel.find({});
     return Items;
