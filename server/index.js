@@ -2,6 +2,7 @@ import express from 'express';
 import config from './src/config/config.js';
 import cors from 'cors';
 import router from './src/routes/routes.js';
+import routerV1 from './src/routes/v1/routes.js'
 import mongoose from 'mongoose';
 
 import swaggerUi from 'swagger-ui-express';
@@ -24,6 +25,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(docs));
 
 app.use(express.json());
 app.use('/api', router);
+app.use('/api/v1', routerV1);
 app.use(express.urlencoded({ extended: true }));
 app.listen(config.port, () => {
   console.log(`Server Started at ${config.port}`);
