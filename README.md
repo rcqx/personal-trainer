@@ -32,7 +32,7 @@ To get a local copy up and running follow these simple example steps.
 ### Usage
 
 ### Api Documentation
-[Api v1 Docs](https://documenter.getpostman.com/view/17518418/2s946fdCHh#85882990-5bf1-4019-bd3b-5b1879b4a53c)
+- [Api v1 Docs](https://documenter.getpostman.com/view/17518418/2s946fdCHh#85882990-5bf1-4019-bd3b-5b1879b4a53c)
 
 ### Run tests
 
