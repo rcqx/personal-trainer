@@ -15,6 +15,8 @@ import {
   addBodyComposition,
 } from "../controllers/bodyComposition.js";
 
+import { getGoals, addGoal } from "../controllers/goal.js";
+
 const router = express.Router();
 const provider = new OpenAiProvider(config.llm.model, config.llm.apikey);
 const service = new OpenAiService(provider);
@@ -24,19 +26,7 @@ const controller = new OpenAiController(service);
 router.get("/get-all-compositions", getAllCompostions);
 
 // GET created goals
-router.get("/get-all-goals", (req, res) => {
-  const getItems = async () => {
-    const Items = await goalsModel.find({});
-    return Items;
-  };
-  getItems()
-    .then((data) => {
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      res.status(400).json({ message: err.message });
-    });
-});
+router.get("/get-all-goals", getGoals);
 
 // Get created exercise plans
 router.get("/get-exercise-forms", (req, res) => {
@@ -108,26 +98,7 @@ router.post("/create-mealplan", async (req, res) => {
 
 router.post("/body-composition", addBodyComposition);
 
-router.post("/create-goals", async (req, res) => {
-  const data = new goalsModel({
-    id: uuidv4(),
-    trainingFocus: req.body.trainingFocus,
-    weight: req.body.weight,
-    bodyFat: req.body.bodyFat,
-    frequency: req.body.frequency,
-    lbm: req.body.lbm,
-    bmi: req.body.bmi,
-    flexibility: req.body.flexibility,
-    cardio: req.body.cardio,
-  });
-
-  try {
-    const dataToSave = await data.save();
-    res.status(200).json(dataToSave);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
+router.post("/create-goals", addGoal);
 
 // openai test endpoint
 router.post("/generate-workout", controller.generateText);
