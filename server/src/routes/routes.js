@@ -9,31 +9,19 @@ import bodyCompositionModel from "../models/bodyComposition.js";
 import goalsModel from "../models/goals.js";
 import MealPlanModel from "../models/mealPlan.js";
 
+// Controllers
+import {
+  getAllCompostions,
+  addBodyComposition,
+} from "../controllers/composition.js";
+
 const router = express.Router();
 const provider = new OpenAiProvider(config.llm.model, config.llm.apikey);
 const service = new OpenAiService(provider);
 const controller = new OpenAiController(service);
 
-
-
-
 // GET body compositions
-router.get("/get-all-compositions", (req, res) => {
-  const getItems = async () => {
-    const Items = await bodyCompositionModel.find({});
-    return Items;
-  };
-  getItems()
-    .then((data) => {
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      res.status(400).json({ message: err.message });
-    });
-});
-
-
-
+router.get("/get-all-compositions", getAllCompostions);
 
 // GET created goals
 router.get("/get-all-goals", (req, res) => {
@@ -64,7 +52,6 @@ router.get("/get-exercise-forms", (req, res) => {
       res.status(400).json({ message: err.message });
     });
 });
-
 
 router.post("/create-form", async (req, res) => {
   const data = new FormModel({
@@ -100,7 +87,6 @@ router.get("/get-mealplan", (req, res) => {
     });
 });
 
-
 router.post("/create-mealplan", async (req, res) => {
   const data = new MealPlanModel({
     id: uuidv4(),
@@ -120,30 +106,7 @@ router.post("/create-mealplan", async (req, res) => {
   }
 });
 
-
-
-
-router.post("/body-composition", async (req, res) => {
-  const data = new bodyCompositionModel({
-    id: uuidv4(),
-    age: req.body.age,
-    weight: req.body.weight,
-    height: req.body.height,
-    bodyFat: req.body.bodyFat,
-    lbm: req.body.lbm,
-    bmi: req.body.bmi,
-    waist: req.body.waist,
-    bodytype: req.body.bodytype,
-  });
-
-  try {
-    const dataToSave = await data.save();
-    res.status(200).json(dataToSave);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
+router.post("/body-composition", addBodyComposition);
 
 router.post("/create-goals", async (req, res) => {
   const data = new goalsModel({

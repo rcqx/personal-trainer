@@ -1,4 +1,4 @@
-const bodyCompositionComponent = {
+const bodyComposition = {
   BodyComposition: {
     type: "object",
     properties: {
@@ -30,14 +30,17 @@ const bodyCompositionComponent = {
       lbm: {
         type: "number",
         description: "The user's lean body mass.",
+        example: 60,
       },
       bmi: {
         type: "number",
         description: "The user's body mass index.",
+        example: 24
       },
       waist: {
         type: "number",
         description: "The user's waist measurement.",
+        example: 80,
       },
       bodytype: {
         type: "string",
@@ -46,7 +49,18 @@ const bodyCompositionComponent = {
       },
     },
     required: ["id", "age", "weight", "height", "bodyFat", "bodytype"],
+    example: {
+      id: "bdjhf",
+      age: 30,
+      weight: 75,
+      height: 175,
+      bodyFat: 20,
+      lbm: 60,
+      bmi: 24,
+      waist: 80,
+      bodytype: "Mesomorph",
+    },
   },
 };
 
-export default bodyCompositionComponent;
+export default bodyComposition;
