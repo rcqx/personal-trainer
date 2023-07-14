@@ -10,7 +10,8 @@ const config = {
   llm: {
     model: process.env.OPEN_AI_MODEL,
     apikey: process.env.OPEN_AI_KEY,
-  }
+  },
+  env: process.env.NODE_ENV
 };
 
 export default config;
