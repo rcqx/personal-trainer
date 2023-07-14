@@ -5,6 +5,7 @@ const router = express.Router();
 import bodyCompositionRoutes from './bodyComposition.js';
 import goalRoutes from './goal.js';
 import workoutRoutes from './workout.js';
+import mealPlanRoutes from './mealPlan.js';
 
 
 router.get("/", (req, res, next) => {
@@ -15,6 +16,7 @@ router.get("/", (req, res, next) => {
 router.use('/body-composition', bodyCompositionRoutes);
 router.use('/goal', goalRoutes);
 router.use('/workout', workoutRoutes);
-// Add more route files as needed
+router.use('/mealplan', mealPlanRoutes);
+
 
 export default router;
