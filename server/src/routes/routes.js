@@ -1,21 +1,19 @@
 import express from "express";
 import config from "../config/config.js";
-import { v4 as uuidv4 } from "uuid";
 import OpenAiProvider from "../providers/provider.js";
 import OpenAiService from "../services/service.js";
 import OpenAiController from "../controllers/controller.js";
-import FormModel from "../models/workoutForm.js";
-import bodyCompositionModel from "../models/bodyComposition.js";
-import goalsModel from "../models/goals.js";
-import MealPlanModel from "../models/mealPlan.js";
+
 
 // Controllers
 import {
   getAllCompostions,
   addBodyComposition,
 } from "../controllers/bodyComposition.js";
-
 import { getGoals, addGoal } from "../controllers/goal.js";
+import { getWorkout, addWorkout } from "../controllers/workout.js";
+import { mealPlan, addMealPlan } from "../controllers/mealPlan.js";
+
 
 const router = express.Router();
 const provider = new OpenAiProvider(config.llm.model, config.llm.apikey);
@@ -29,72 +27,15 @@ router.get("/get-all-compositions", getAllCompostions);
 router.get("/get-all-goals", getGoals);
 
 // Get created exercise plans
-router.get("/get-exercise-forms", (req, res) => {
-  const getItems = async () => {
-    const Items = await FormModel.find({});
-    return Items;
-  };
-  getItems()
-    .then((data) => {
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      res.status(400).json({ message: err.message });
-    });
-});
+router.get("/get-exercise-forms", getWorkout);
 
-router.post("/create-form", async (req, res) => {
-  const data = new FormModel({
-    id: uuidv4(),
-    planName: req.body.planName,
-    objective: req.body.objective,
-    bodyComposition: req.body.bodyComposition,
-    fitnessGoal: req.body.fitnessGoal,
-    status: req.body.status,
-  });
-
-  try {
-    const dataToSave = await data.save();
-    res.status(200).json(dataToSave);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
+router.post("/create-form", addWorkout);
 
 // Meal Plan routes
 
-router.get("/get-mealplan", (req, res) => {
-  const getItems = async () => {
-    const Items = await MealPlanModel.find({});
-    return Items;
-  };
-  getItems()
-    .then((data) => {
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      res.status(400).json({ message: err.message });
-    });
-});
+router.get("/get-mealplan", mealPlan);
 
-router.post("/create-mealplan", async (req, res) => {
-  const data = new MealPlanModel({
-    id: uuidv4(),
-    planName: req.body.planName,
-    objective: req.body.objective,
-    bodyComposition: req.body.bodyComposition,
-    fitnessGoal: req.body.fitnessGoal,
-    excercisePlan: req.body.excercisePlan,
-    status: req.body.status,
-  });
-
-  try {
-    const dataToSave = await data.save();
-    res.status(200).json(dataToSave);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
+router.post("/create-mealplan", addMealPlan);
 
 router.post("/body-composition", addBodyComposition);
 
