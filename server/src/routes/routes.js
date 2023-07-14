@@ -13,7 +13,7 @@ import MealPlanModel from "../models/mealPlan.js";
 import {
   getAllCompostions,
   addBodyComposition,
-} from "../controllers/composition.js";
+} from "../controllers/bodyComposition.js";
 
 const router = express.Router();
 const provider = new OpenAiProvider(config.llm.model, config.llm.apikey);
