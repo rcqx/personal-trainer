@@ -67,60 +67,6 @@ const mealPlan = {
       status: "Active",
     },
   },
-  BodyComposition: {
-    type: "object",
-    properties: {
-      age: {
-        type: "number",
-        format: "int32",
-        description: "Age",
-      },
-      weight: {
-        type: "number",
-        format: "double",
-        description: "Weight",
-      },
-      height: {
-        type: "number",
-        format: "double",
-        description: "Height",
-      },
-      bodyFat: {
-        type: "number",
-        format: "double",
-        description: "Body Fat",
-      },
-      lbm: {
-        type: "number",
-        format: "double",
-        description: "Lean Body Mass",
-      },
-      bmi: {
-        type: "number",
-        format: "double",
-        description: "Body Mass Index",
-      },
-      waist: {
-        type: "number",
-        format: "double",
-        description: "Waist measurement",
-      },
-      bodyType: {
-        type: "string",
-        description: "Body Type",
-      },
-    },
-    required: [
-      "age",
-      "weight",
-      "height",
-      "bodyFat",
-      "lbm",
-      "bmi",
-      "waist",
-      "bodyType",
-    ],
-  },
   FitnessGoal: {
     type: "object",
     properties: {
