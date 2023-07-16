@@ -21,7 +21,8 @@ class OpenAiProvider {
       const generateText = response.data.choices[0].text.trim();
       return generateText;
     } catch (error) {
-      console.error('Error:', error);
+      // error.request.data.error
+      console.error('Error:', error.request.data.error);
       throw error;
     }
   }

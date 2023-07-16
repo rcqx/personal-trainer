@@ -1,7 +1,16 @@
 import mongoose from "mongoose";
 
 const WorkoutSchema = new mongoose.Schema({
-  responseTest: {
+  id: {
+    type: String,
+    unique: true,
+  },
+  formId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  response: {
     type: String,
     required: true,
   },

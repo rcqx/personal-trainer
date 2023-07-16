@@ -31,7 +31,7 @@ const ExercisePlans = () => {
   console.log(plans);
 
   return (
-    <div className="flex flex-col justify-between">
+    <div>
       <div className="justify-between items-center m-[0_auto] max-w-7xl">
         <div className="flex justify-between items-center border-b antialiased border-slate-200 h-[6em]">
           <h1 className="font-[Newsreader] text-5xl">Exercise Plans</h1>
@@ -45,8 +45,8 @@ const ExercisePlans = () => {
           </button>
         </div>
         <div>
-          <h2 className="text-start text-lg font-semibold py-5">Routines (1)</h2>
-          <div className="workout-cards py-2 flex justify-between items-center gap-5 mb-20">
+          <h2 className="text-start text-lg font-semibold py-5">{`Workouts (${plans.length})`}</h2>
+          <div className="workout-cards py-2 flex justify-start items-center gap-5 mb-20">
             {plans.map((item) => {
               return (
                 <div className="w-1/3 border border-slate-200 shadow-md rounded-3xl overflow-hidden cursor-pointer">
