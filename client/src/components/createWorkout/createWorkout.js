@@ -80,11 +80,6 @@ const CreateWorkout = () => {
       },
       status: "new",
     };
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
 
     try {
       await createWorkouttForm(formData).then((res) => {
@@ -130,11 +125,6 @@ const CreateWorkout = () => {
       `,
       maxTokens: 1000,
     }
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
 
     try {
       console.log("inside try");
