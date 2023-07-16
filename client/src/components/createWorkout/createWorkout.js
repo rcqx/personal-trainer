@@ -1,7 +1,6 @@
 import { MdOutlineAdd } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
-
 import { createWorkouttForm, generateWorkout } from "../../api/exceriseForm";
 import { getBodyComposition } from "../../api/bodyComposition";
 import { getGoals } from "../../api/goal";
@@ -88,18 +87,21 @@ const CreateWorkout = () => {
     };
 
     try {
-      await createWorkouttForm(formData);
+      await createWorkouttForm(formData).then((res) => {
+        createWorkout(res.data.id, bodyComposition, fitnessGoal);
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const createWorkout = async (bodyComposition, fitnessGoal) => {
+  const createWorkout = async (id, bodyComposition, fitnessGoal) => {
     // e.preventDefault();
-    console.log("before");
     const formData = {
+      formId: id,
       prompt: `Act as a training coach. Suggest exercises according to the user's input information and desired output goals. 
       Provide a detailed exercise routine following user's input and goals parameters. Create a schedule based on user's Frequency which unit is days per week.
+      Deliver data in a table form.
       To do this, use the following data:
       inputs:
       age: ${bodyComposition.age},
@@ -193,7 +195,7 @@ const CreateWorkout = () => {
               hover:bg-blue-800 flex justify-center items-center"
             onClick={(e) => {
               handleFormSubmission(e, bodyComposition, fitnessGoal);
-              createWorkout(bodyComposition, fitnessGoal);
+              // createWorkout(e, bodyComposition, fitnessGoal);
             }}
           >
             {loading ?
@@ -205,7 +207,7 @@ const CreateWorkout = () => {
               </>)}
           </button>
         </div>
-      </form>
+      </form >
     </div >
   );
 };

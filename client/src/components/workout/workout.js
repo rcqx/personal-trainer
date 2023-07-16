@@ -17,10 +17,9 @@ const Workout = () => {
     fetchData();
   }, []);
 
-  console.log(workouts);
-
   return (
-    <div className="flex min-h-[40em] justify-between items-center m-[0_auto] max-w-7xl border border-blue-500">
+    <div className="flex min-h-[40em] justify-between 
+    items-center m-[0_auto] max-w-7xl">
       <h1>{workouts[0]?.responseTest}</h1>
     </div>
   );
