@@ -31,8 +31,7 @@ router.get("/get-exercise-forms", getWorkout);
 router.post("/create-form", addWorkout);
 
 // Meal Plan routes
-
-router.get("/get-mealplan", mealPlan);
+router.get("/get-all-mealplans", mealPlan);
 
 router.post("/create-mealplan", addMealPlan);
 
