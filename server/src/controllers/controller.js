@@ -1,4 +1,5 @@
 import WorkoutModel from "../models/workout.js";
+import { v4 as uuidv4 } from "uuid";
 
 class OpenAiController {
   constructor(service) {
@@ -6,11 +7,13 @@ class OpenAiController {
   }
 
   generateText = async (req, res) => {
-    const { prompt, maxTokens } = req.body;
+    const { formId, prompt, maxTokens } = req.body;
     try {
       const generatedText = await this.service.generateText(prompt, maxTokens);
       const data = new WorkoutModel({
-        responseTest: generatedText,
+        id: uuidv4(),
+        formId,
+        response: generatedText,
       });
       const dataToSave = await data.save();
       res.status(200).json(dataToSave);

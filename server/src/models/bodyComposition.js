@@ -31,7 +31,7 @@ const bodyCompositionSchema = new mongoose.Schema({
   waist: {
     type: Number,
   },
-  bodytype: {
+  bodyType: {
     type: String,
     required: true,
   }
