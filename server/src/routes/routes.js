@@ -3,6 +3,7 @@ import config from "../config/config.js";
 import OpenAiProvider from "../providers/provider.js";
 import OpenAiService from "../services/service.js";
 import OpenAiController from "../controllers/controller.js";
+import WorkoutModel from "../models/workout.js";
 
 // Controllers
 import {
