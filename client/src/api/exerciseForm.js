@@ -8,6 +8,6 @@ export const createWorkouttForm = async (formData) => {
   return await API.post("/create-form", formData);
 };
 
-export const generateWorkout = async (formData) => {
-  return await API.post("/generate-workout", formData);
+export const createWorkout = async (formData) => {
+  return await API.post("/create-workout", formData);
 };

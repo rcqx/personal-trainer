@@ -1,7 +1,9 @@
 import { MdOutlineAdd } from "react-icons/md";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
+import { createMealPlanForm, createMealPlan } from "../../api/mealPlanForm";
+import { getBodyComposition } from "../../api/bodyComposition";
+import { getGoals } from "../../api/goal";
 
 const CreateMealPlan = () => {
   const [planName, setPlanName] = useState("");
@@ -15,9 +17,7 @@ const CreateMealPlan = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/api/get-all-compositions"
-        );
+        const response = await getBodyComposition();
         setBodyCompositions(response.data);
       } catch (error) {
         console.log(error);
@@ -30,9 +30,7 @@ const CreateMealPlan = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/api/get-all-goals"
-        );
+        const response = await getGoals()
         setFitnessGoals(response.data);
       } catch (error) {
         console.log(error);
@@ -47,15 +45,9 @@ const CreateMealPlan = () => {
       setPlanName(e.target.value);
     } else if (e.target.id === "objective") {
       setObjective(e.target.value);
-    } else if (
-      e.target.id === "bodyComposition" &&
-      e.target.value !== "placeholder"
-    ) {
+    } else if (e.target.id === "bodyComposition" && e.target.value !== "placeholder") {
       setBodyComposition(bodyCompositions[0]);
-    } else if (
-      e.target.id === "fitnessGoal" &&
-      e.target.value !== "placeholder"
-    ) {
+    } else if (e.target.id === "fitnessGoal" && e.target.value !== "placeholder") {
       setFitnessGoal(fitnessGoals[0]);
     }
   };
@@ -63,7 +55,6 @@ const CreateMealPlan = () => {
   const handleFormSubmission = async (e, bodyComposition, fitnessGoal) => {
     e.preventDefault();
     setLoading(true);
-    const URL = "http://localhost:8080/api/create-form";
     const formData = {
       planName,
       objective,
@@ -89,26 +80,21 @@ const CreateMealPlan = () => {
       },
       status: "new",
     };
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
 
     try {
-      await axios.post(URL, formData, config);
+      await createMealPlanForm(formData).then((res) => {
+        createMeal(res.data.id, bodyComposition, fitnessGoal);
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const createWorkout = async (bodyComposition, fitnessGoal) => {
-    // e.preventDefault();
-    console.log("before");
-    const URL = "http://localhost:8080/api/generate-workout";
+  const createMeal = async (id, bodyComposition, fitnessGoal, objective, workout) => {
     const formData = {
-      prompt: `Act as a training coach. Suggest exercises according to the user's input information and desired output goals. 
-      Provide a detailed exercise routine following user's input and goals parameters. Create a schedule based on user's Frequency which unit is days per week.
+      formId: id,
+      prompt: `Act as a nutritional coach. Suggest a meal plan according to the user's input information, desired output goals and workout routine. 
+      Provide a detailed weekly meal plan routine following user's input, goals and objective parameters. Suggests 4 meals per day, breakfast, lunch, dinner and a snack.
       To do this, use the following data:
       inputs:
       age: ${bodyComposition.age},
@@ -129,23 +115,19 @@ const CreateMealPlan = () => {
       bmi: ${fitnessGoal.bmi},
       flexibility: ${fitnessGoal.flexibility},
       cardio: ${fitnessGoal.cardio}
-      
-      Deliver to the user the following:
-      Specific exercises and the actual name of the exercise.
-      Create a detailed description of the suggested exercise plan according to the user’s input parameters and output goals.
-      If the cardio value equals true suggest a cardio session at the end of every training session.
+
+      workout routine:
+      workout: ${workout}
+
+      objective:
+      objective: ${objective}
       `,
-      maxTokens: 1000,
-    };
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      maxTokens: 1200,
     };
 
     try {
       console.log("inside try");
-      await axios.post(URL, formData, config).then(() => setLoading(false));
+      await createMealPlan(formData).then(() => setLoading(false));
     } catch (error) {
       console.log("inside error");
       console.log(error);
@@ -153,11 +135,11 @@ const CreateMealPlan = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center" >
       <form
         className="w-full rounded-md flex flex-col justify-around"
         onChange={(e) => {
-          handleFormChange(e);
+          handleFormChange(e)
         }}
       >
         <div className="flex flex-col mb-3">
@@ -183,14 +165,8 @@ const CreateMealPlan = () => {
             className="p-2 bg-white border border-slate-200 rounded-md"
             defaultValue="body composition 1"
           >
-            <option
-              label="Select your current composition"
-              value="placeholder"
-            />
-            <option
-              label={`Initial Body Composition`}
-              value={bodyComposition}
-            />
+            <option label="Select your current composition" value="placeholder" />
+            <option label={`Initial Body Composition`} value={bodyComposition} />
           </select>
         </div>
         <div className="flex flex-col mb-3">
@@ -201,7 +177,7 @@ const CreateMealPlan = () => {
           >
             <option label="Select a goal" value="placeholder" />
             <option label={`Initial Goal`} value={fitnessGoal} />
-          </select>{" "}
+          </select>
         </div>
         <div className="mt-4 flex justify-end">
           <button
@@ -209,21 +185,19 @@ const CreateMealPlan = () => {
               hover:bg-blue-800 flex justify-center items-center"
             onClick={(e) => {
               handleFormSubmission(e, bodyComposition, fitnessGoal);
-              createWorkout(bodyComposition, fitnessGoal);
             }}
           >
-            {loading ? (
-              <BiLoaderAlt size={30} className="animate-spin" />
-            ) : (
-              <>
+            {loading ?
+              (<BiLoaderAlt size={30} className="animate-spin" />)
+              :
+              (<>
                 <MdOutlineAdd className="mr-1" />
-                <h1>Create a Meal Plan</h1>
-              </>
-            )}
+                <h1>Create Meal Plan</h1>
+              </>)}
           </button>
         </div>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 

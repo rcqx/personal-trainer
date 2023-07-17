@@ -5,7 +5,7 @@ import strength from "../assets/weights.jpg"
 import multi from "../assets/crossfit.jpg"
 import { AiOutlineFileAdd } from "react-icons/ai";
 import Modal from "../components/createWorkout/modal";
-import { getWorkOutForm } from "../api/exceriseForm";
+import { getWorkOutForm } from "../api/exerciseForm";
 
 const ExercisePlans = () => {
   const [modal, setModal] = useState(false);

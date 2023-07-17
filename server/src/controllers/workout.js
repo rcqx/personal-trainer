@@ -10,7 +10,7 @@ export const getWorkout = async (req, res, next) => {
   }
 };
 
-export const addWorkout = async (req, res, next) => {
+export const createWorkoutForm = async (req, res, next) => {
   const data = new FormModel({
     id: uuidv4(),
     planName: req.body.planName,

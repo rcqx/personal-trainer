@@ -1,7 +1,7 @@
 import { API } from "./apiConfig";
 
-export const getMealPlan = async () => {
-  return await API.get("/get-all-mealplans");
+export const createMealPlanForm = async (formData) => {
+  return await API.post("/create-mealplan-form", formData);
 };
 
 export const createMealPlan = async (formData) => {

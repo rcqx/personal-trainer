@@ -11,8 +11,8 @@ import {
   addBodyComposition,
 } from "../controllers/bodyComposition.js";
 import { getGoals, addGoal } from "../controllers/goal.js";
-import { getWorkout, addWorkout } from "../controllers/workout.js";
-import { mealPlan, addMealPlan } from "../controllers/mealPlan.js";
+import { getWorkout, createWorkoutForm } from "../controllers/workout.js";
+import { mealPlan, createMealPlanForm } from "../controllers/mealPlan.js";
 
 const router = express.Router();
 const provider = new OpenAiProvider(config.llm.model, config.llm.apikey);
@@ -27,14 +27,12 @@ router.get("/get-all-goals", getGoals);
 
 // Get created exercise plans
 router.get("/get-exercise-forms", getWorkout);
-
-router.post("/create-form", addWorkout);
+router.post("/create-workout-form", createWorkoutForm);
 
 // Meal Plan routes
+router.get("/get-all-mealplans", mealPlan);
+router.post("/create-mealplan-form", createMealPlanForm);
 
-router.get("/get-mealplan", mealPlan);
-
-router.post("/create-mealplan", addMealPlan);
 
 router.post("/body-composition", addBodyComposition);
 
@@ -57,9 +55,9 @@ router.get("/get-all-workouts", (req, res) => {
 });
 
 // openai test endpoint
-router.post("/generate-workout", controller.generateText);
+router.post("/create-workout", controller.generateText);
 
-router.post("/generate-mealplan", controller.generateText);
+router.post("/create-mealplan", controller.generateMeal);
 
 
 // SOME SAMPLES BELOW
