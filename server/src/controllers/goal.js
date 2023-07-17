@@ -1,16 +1,13 @@
 import goalsModel from "../models/goals.js";
 import { v4 as uuidv4 } from "uuid";
+import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 
-export const getGoals = async (req, res, next) => {
-  try {
-    const goals = await goalsModel.find({});
-    res.status(200).json(goals);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-};
+export const getGoals = catchAsyncErrors(async (req, res, next) => {
+  const goals = await goalsModel.find({});
+  res.status(200).json(goals);
+});
 
-export const addGoal = async (req, res, next) => {
+export const addGoal = catchAsyncErrors(async (req, res, next) => {
   const data = new goalsModel({
     id: uuidv4(),
     trainingFocus: req.body.trainingFocus,
@@ -23,10 +20,6 @@ export const addGoal = async (req, res, next) => {
     cardio: req.body.cardio,
   });
 
-  try {
-    const dataToSave = await data.save();
-    res.status(200).json(dataToSave);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
+  const dataToSave = await data.save();
+  res.status(200).json(dataToSave);
+});
