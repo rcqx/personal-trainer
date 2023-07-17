@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import cardio from "../assets/cardio.jpg"
-import strength from "../assets/weights.jpg"
-import multi from "../assets/crossfit.jpg"
 import { AiOutlineFileAdd } from "react-icons/ai";
 import Modal from "../components/createMealPlan/modal";
 import { getMealPlan } from "../api/mealPlan";
@@ -32,7 +29,7 @@ const MealPlans = () => {
 
   return (
     <div className="flex flex-col justify-between">
-      <div className="justify-between items-center m-[0_auto] max-w-7xl">
+      <div className="justify-between items-center m-[0_auto] max-w-7xl w-full">
         <div className="flex justify-between items-center border-b antialiased border-slate-200 h-[6em]">
           <h1 className="font-[Newsreader] text-5xl">Create a Meal Plan</h1>
           <button
@@ -41,11 +38,11 @@ const MealPlans = () => {
             onClick={showModal}
           >
             <AiOutlineFileAdd size={20} className="mr-2" />
-            A New Plan
+            New Meal Plan
           </button>
         </div>
         <div>
-          <h2 className="text-start text-lg font-semibold py-5">Routines (1)</h2>
+          <h2 className="text-start text-lg font-semibold py-5">{`Routines (${plans.length})`}</h2>
           <div className="workout-cards py-2 flex justify-between items-center gap-5 mb-20">
             {plans.map((item) => {
               return (
@@ -65,7 +62,7 @@ const MealPlans = () => {
       <Modal
         modal={modal}
         onClose={() => setModal(false)}
-        title={"Plan information"} />
+        title="Plan information" />
     </div >
   );
 };

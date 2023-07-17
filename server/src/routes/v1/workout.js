@@ -1,7 +1,7 @@
 import express from "express";
 
 import {
-    getWorkout, addWorkout
+    getWorkout, createWorkoutForm
 } from "../../controllers/workout.js";
 
 const router = express.Router();
@@ -9,6 +9,6 @@ const router = express.Router();
 // GET goals
 router.get("/", getWorkout);
 // create goal
-router.post("/", addWorkout);
+router.post("/", createWorkoutForm);
 
 export default router;

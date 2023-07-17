@@ -1,7 +1,7 @@
 import express from "express";
 
 import {
-    mealPlan, addMealPlan
+    mealPlan, createMealPlanForm
 } from "../../controllers/mealPlan.js";
 
 const router = express.Router();
@@ -9,6 +9,6 @@ const router = express.Router();
 // GET goals
 router.get("/", mealPlan);
 // create goal
-router.post("/", addMealPlan);
+router.post("/", createMealPlanForm);
 
 export default router;

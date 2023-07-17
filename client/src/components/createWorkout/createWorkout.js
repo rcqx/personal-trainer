@@ -1,7 +1,7 @@
 import { MdOutlineAdd } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
-import { createWorkouttForm, generateWorkout } from "../../api/exceriseForm";
+import { createWorkouttForm, createWorkout } from "../../api/exerciseForm";
 import { getBodyComposition } from "../../api/bodyComposition";
 import { getGoals } from "../../api/goal";
 
@@ -91,7 +91,6 @@ const CreateWorkout = () => {
   };
 
   const createWorkout = async (id, bodyComposition, fitnessGoal) => {
-    // e.preventDefault();
     const formData = {
       formId: id,
       prompt: `Act as a training coach. Suggest exercises according to the user's input information and desired output goals. 
@@ -128,7 +127,7 @@ const CreateWorkout = () => {
 
     try {
       console.log("inside try");
-      await generateWorkout(formData).then(() => setLoading(false));
+      await createWorkout(formData).then(() => setLoading(false));
     } catch (error) {
       console.log("inside error");
       console.log(error);

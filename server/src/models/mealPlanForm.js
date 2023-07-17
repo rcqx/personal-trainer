@@ -34,15 +34,12 @@ const MealPlanSchema = new mongoose.Schema({
     flexibility: { type: Boolean, required: true },
     cardio: { type: Boolean, required: true },
   },
-  exercisePlan: {
-    planName: { type: String, required: true },
-  },
   status: {
     type: String,
     required: true,
   },
 });
 
-const MealPlanModel = mongoose.model('mealPlan', MealPlanSchema);
+const MealPlanFormModel = mongoose.model('mealPlan', MealPlanSchema);
 
-export default MealPlanModel;
+export default MealPlanFormModel;
