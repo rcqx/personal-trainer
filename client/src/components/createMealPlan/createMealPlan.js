@@ -1,7 +1,7 @@
 import { MdOutlineAdd } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
-import { createMealPlanForm } from "../../api/mealPlanForm";
+import { createMealPlanForm, createMealPlan } from "../../api/mealPlanForm";
 import { getBodyComposition } from "../../api/bodyComposition";
 import { getGoals } from "../../api/goal";
 
@@ -83,15 +83,14 @@ const CreateMealPlan = () => {
 
     try {
       await createMealPlanForm(formData).then((res) => {
-        console.log(res);
-        // createWorkout(res.data.id, bodyComposition, fitnessGoal);
+        createMeal(res.data.id, bodyComposition, fitnessGoal);
       });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const createWorkout = async (id, bodyComposition, fitnessGoal, objective, workout) => {
+  const createMeal = async (id, bodyComposition, fitnessGoal, objective, workout) => {
     const formData = {
       formId: id,
       prompt: `Act as a nutritional coach. Suggest a meal plan according to the user's input information, desired output goals and workout routine. 
@@ -128,7 +127,7 @@ const CreateMealPlan = () => {
 
     try {
       console.log("inside try");
-      await createWorkout(formData).then(() => setLoading(false));
+      await createMealPlan(formData).then(() => setLoading(false));
     } catch (error) {
       console.log("inside error");
       console.log(error);

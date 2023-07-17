@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MealPlanSchema = new mongoose.Schema({
+const MealPlanFormSchema = new mongoose.Schema({
   id: {
     type: String,
     required: true,
@@ -40,6 +40,6 @@ const MealPlanSchema = new mongoose.Schema({
   },
 });
 
-const MealPlanFormModel = mongoose.model('mealPlan', MealPlanSchema);
+const MealPlanFormModel = mongoose.model('mealPlan', MealPlanFormSchema);
 
 export default MealPlanFormModel;

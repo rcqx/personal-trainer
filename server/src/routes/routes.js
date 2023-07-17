@@ -57,7 +57,7 @@ router.get("/get-all-workouts", (req, res) => {
 // openai test endpoint
 router.post("/create-workout", controller.generateText);
 
-router.post("/create-mealplan-form", controller.generateText);
+router.post("/create-mealplan", controller.generateMeal);
 
 
 // SOME SAMPLES BELOW
