@@ -10,7 +10,7 @@ export const errorHandler = (err, req, res, next) => {
     res.status(err.httpStatusCode).json({
       success: false,
       error: err,
-      description: err.description,
+      message: err.message,
       stack: err.stack,
     });
   }
