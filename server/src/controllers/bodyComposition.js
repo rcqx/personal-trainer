@@ -1,16 +1,13 @@
 import bodyCompositionModel from "../models/bodyComposition.js";
 import { v4 as uuidv4 } from "uuid";
+import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 
-export const getAllCompostions = async (req, res) => {
-  try {
-    const items = await bodyCompositionModel.find({});
-    res.status(200).json(items);
-  } catch {
-    res.status(400).json({ message: err.message });
-  }
-};
+export const getAllCompostions = catchAsyncErrors(async (req, res) => {
+  const items = await bodyCompositionModel.find({});
+  res.status(200).json(items);
+});
 
-export const addBodyComposition = async (req, res) => {
+export const addBodyComposition = catchAsyncErrors(async (req, res) => {
   const data = new bodyCompositionModel({
     id: uuidv4(),
     age: req.body.age,
@@ -23,10 +20,6 @@ export const addBodyComposition = async (req, res) => {
     bodytype: req.body.bodytype,
   });
 
-  try {
-    const dataToSave = await data.save();
-    res.status(200).json(dataToSave);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
+  const dataToSave = await data.save();
+  res.status(200).json(dataToSave);
+});
