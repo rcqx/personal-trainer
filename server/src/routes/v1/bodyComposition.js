@@ -3,6 +3,7 @@ import express from "express";
 import {
   getAllCompostions,
   addBodyComposition,
+  updateBodyComposition
 } from "../../controllers/bodyComposition.js";
 
 const router = express.Router();
@@ -11,5 +12,6 @@ const router = express.Router();
 router.get("/", getAllCompostions);
 // create body composition
 router.post("/", addBodyComposition);
+router.put("/update", updateBodyComposition);
 
 export default router;
