@@ -21,5 +21,7 @@ export const addBodyComposition = catchAsyncErrors(async (req, res) => {
   });
 
   const dataToSave = await data.save();
-  res.status(200).json(dataToSave);
+  res.status(201).json(dataToSave);
 });
+
+
