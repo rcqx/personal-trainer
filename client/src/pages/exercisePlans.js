@@ -6,6 +6,7 @@ import multi from "../assets/crossfit.jpg"
 import { AiOutlineFileAdd } from "react-icons/ai";
 import Modal from "../components/createWorkout/modal";
 import { getWorkOutForm } from "../api/exerciseForm";
+import ExercisePlan from "../components/exercisePlan/exercisePlan";
 
 const ExercisePlans = () => {
   const [modal, setModal] = useState(false);
@@ -49,14 +50,12 @@ const ExercisePlans = () => {
           <div className="workout-cards py-2 flex justify-start items-center gap-5 mb-20">
             {plans.map((item) => {
               return (
-                <div className="w-1/3 border border-slate-200 shadow-md rounded-3xl overflow-hidden cursor-pointer">
-                  <img src={cardio} alt="thumbnail" />
-                  <div className="px-4 py-6 bg-[#FAFAF5]">
-                    <h3 className="text-start font-semibold">{item.planName}</h3>
-                    <h3 className="text-start font-semibold text-green-700">{item.status[0].toUpperCase() + item.status.slice(1)}</h3>
-                    <p className="text-start text-sm text-slate-600">{item.objective[0].toUpperCase() + item.objective.slice(1)}</p>
-                  </div>
-                </div>
+                <ExercisePlan
+                  image={cardio}
+                  planName={item.planName}
+                  status={item.status}
+                  objective={item.objective}
+                />
               );
             })}
           </div>
