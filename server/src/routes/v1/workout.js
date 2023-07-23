@@ -9,6 +9,6 @@ const router = express.Router();
 // GET goals
 router.get("/", getWorkout);
 // create goal
-router.post("/", createWorkoutForm);
+router.post("/new", createWorkoutForm);
 
 export default router;
