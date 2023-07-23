@@ -45,6 +45,6 @@ export const updateGoal = catchAsyncErrors(
 
      // Save the updated body composition
      const updatedGoal =  await goal.save();
-     res.status(200).json({ message: 'Body composition updated successfully', updatedGoal });
+     res.status(200).json({ message: 'Fitness Goal updated successfully', updatedGoal });
   }
 );
