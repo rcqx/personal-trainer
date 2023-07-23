@@ -9,6 +9,6 @@ const router = express.Router();
 // GET goals
 router.get("/", mealPlan);
 // create goal
-router.post("/", createMealPlanForm);
+router.post("/new", createMealPlanForm);
 
 export default router;

@@ -11,7 +11,7 @@ const router = express.Router();
 // GET body compositions
 router.get("/", getAllCompostions);
 // create body composition
-router.post("/", addBodyComposition);
+router.post("/new", addBodyComposition);
 router.put("/update", updateBodyComposition);
 
 export default router;
