@@ -7,9 +7,10 @@ export const ptStoreSlice = createSlice({
   },
   reducers: {
     setSelectedWorkoutForm: (state, action) => {
-      state.ptStore = action.payload;
+      state.selectedWorkoutForm = action.payload;
     }
   },
 });
 
-export const { setSelectedWorkoutForm } = ptStoreSlice.reducer;
+export const { setSelectedWorkoutForm } = ptStoreSlice.actions;
+export default ptStoreSlice.reducer;
