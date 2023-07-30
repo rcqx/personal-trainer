@@ -1,8 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import cardio from "../assets/cardio.jpg"
-import strength from "../assets/weights.jpg"
-import multi from "../assets/crossfit.jpg"
 import { AiOutlineFileAdd } from "react-icons/ai";
 import Modal from "../components/createWorkout/modal";
 import { getWorkOutForm } from "../api/exerciseForm";
@@ -29,8 +25,6 @@ const ExercisePlans = () => {
     fetchData();
   }, []);
 
-  console.log(plans);
-
   return (
     <div>
       <div className="justify-between items-center m-[0_auto] max-w-7xl">
@@ -48,14 +42,9 @@ const ExercisePlans = () => {
         <div>
           <h2 className="text-start text-lg font-semibold py-5">{`Workouts (${plans.length})`}</h2>
           <div className="workout-cards py-2 flex justify-start items-center gap-5 mb-20">
-            {plans.map((item) => {
+            {plans.map((item, index) => {
               return (
-                <ExercisePlan
-                  image={cardio}
-                  planName={item.planName}
-                  status={item.status}
-                  objective={item.objective}
-                />
+                <ExercisePlan key={index + 1} item={item} index={index} />
               );
             })}
           </div>
