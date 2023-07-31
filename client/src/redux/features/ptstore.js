@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const ptStoreSlice = createSlice({
   name: 'ptStore',
   initialState: {
-    selectedWorkoutForm: {},
+    selectedWorkoutForm: [],
   },
   reducers: {
     setSelectedWorkoutForm: (state, action) => {

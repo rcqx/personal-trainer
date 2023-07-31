@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import Modal from "../components/createWorkout/modal";
+import InfoModal from "../components/exercisePlan/infoModal";
+import { useSelector, useDispatch } from "react-redux";
 import { getWorkOutForm } from "../api/exerciseForm";
 import ExercisePlan from "../components/exercisePlan/exercisePlan";
+import { setSelectedWorkoutForm } from "../redux/features/ptstore";
 
 const ExercisePlans = () => {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
+  const [infoModal, setInfoModal] = useState(false);
   const [plans, setPlans] = useState([]);
-
+  const selectedForm = useSelector((state) => state.ptStore.selectedWorkoutForm);
   const showModal = () => {
     setModal(true);
   };
@@ -44,7 +49,15 @@ const ExercisePlans = () => {
           <div className="workout-cards py-2 flex justify-start items-center gap-5 mb-20">
             {plans.map((item, index) => {
               return (
-                <ExercisePlan key={index + 1} item={item} index={index} />
+                <ExercisePlan
+                  key={index + 1}
+                  item={item}
+                  index={index}
+                  setSelectedWorkoutForm={setSelectedWorkoutForm}
+                  dispatch={dispatch}
+                  infoModal={infoModal}
+                  setInfoModal={setInfoModal}
+                />
               );
             })}
           </div>
@@ -53,7 +66,14 @@ const ExercisePlans = () => {
       <Modal
         modal={modal}
         onClose={() => setModal(false)}
-        title={"Plan information"} />
+        title={"Set a new plan"}
+      />
+
+      <InfoModal
+        modal={infoModal}
+        onClose={() => setInfoModal(false)}
+        title={"Plan information"}
+      />
     </div >
   );
 };

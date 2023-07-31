@@ -1,20 +1,21 @@
 import cardio from "../../assets/cardio.jpg"
-import { useDispatch, useSelector } from "react-redux";
-import { setSelectedWorkoutForm } from "../../redux/features/ptstore";
 
-const ExercisePlan = ({ item }) => {
-  const dispatch = useDispatch();
-  const selectedForm = useSelector((state) => state.ptStore.selectedWorkoutForm);
-
-  console.log(selectedForm);
-
+const ExercisePlan = ({
+  item,
+  setSelectedWorkoutForm,
+  dispatch,
+  infoModal,
+  setInfoModal,
+}) => {
   return (
     <div
       className="w-1/3 border border-slate-200 shadow-md 
-    rounded-3xl overflow-hidden cursor-pointer"
+        rounded-3xl overflow-hidden cursor-pointer"
       onClick={() => {
         dispatch(setSelectedWorkoutForm(item));
-      }}
+        setInfoModal(!infoModal);
+      }
+      }
     >
       <img src={cardio} alt="thumbnail" />
       <div className="px-4 py-6 bg-[#FAFAF5]">
