@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import cardio from "../assets/cardio.jpg"
-import strength from "../assets/weights.jpg"
-import multi from "../assets/crossfit.jpg"
 import { AiOutlineFileAdd } from "react-icons/ai";
 import Modal from "../components/createWorkout/modal";
+import InfoModal from "../components/exercisePlan/infoModal";
+import { useSelector, useDispatch } from "react-redux";
 import { getWorkOutForm } from "../api/exerciseForm";
+import ExercisePlan from "../components/exercisePlan/exercisePlan";
+import { setSelectedWorkoutForm } from "../redux/features/ptstore";
 
 const ExercisePlans = () => {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
+  const [infoModal, setInfoModal] = useState(false);
   const [plans, setPlans] = useState([]);
-
+  const selectedForm = useSelector((state) => state.ptStore.selectedWorkoutForm);
   const showModal = () => {
     setModal(true);
   };
@@ -27,8 +29,6 @@ const ExercisePlans = () => {
 
     fetchData();
   }, []);
-
-  console.log(plans);
 
   return (
     <div>
@@ -47,16 +47,17 @@ const ExercisePlans = () => {
         <div>
           <h2 className="text-start text-lg font-semibold py-5">{`Workouts (${plans.length})`}</h2>
           <div className="workout-cards py-2 flex justify-start items-center gap-5 mb-20">
-            {plans.map((item) => {
+            {plans.map((item, index) => {
               return (
-                <div className="w-1/3 border border-slate-200 shadow-md rounded-3xl overflow-hidden cursor-pointer">
-                  <img src={cardio} alt="thumbnail" />
-                  <div className="px-4 py-6 bg-[#FAFAF5]">
-                    <h3 className="text-start font-semibold">{item.planName}</h3>
-                    <h3 className="text-start font-semibold text-green-700">{item.status[0].toUpperCase() + item.status.slice(1)}</h3>
-                    <p className="text-start text-sm text-slate-600">{item.objective[0].toUpperCase() + item.objective.slice(1)}</p>
-                  </div>
-                </div>
+                <ExercisePlan
+                  key={index + 1}
+                  item={item}
+                  index={index}
+                  setSelectedWorkoutForm={setSelectedWorkoutForm}
+                  dispatch={dispatch}
+                  infoModal={infoModal}
+                  setInfoModal={setInfoModal}
+                />
               );
             })}
           </div>
@@ -65,7 +66,14 @@ const ExercisePlans = () => {
       <Modal
         modal={modal}
         onClose={() => setModal(false)}
-        title={"Plan information"} />
+        title={"Set a new plan"}
+      />
+
+      <InfoModal
+        modal={infoModal}
+        onClose={() => setInfoModal(false)}
+        title={"Plan information"}
+      />
     </div >
   );
 };
