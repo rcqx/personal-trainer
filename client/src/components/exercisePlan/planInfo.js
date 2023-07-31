@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const PlanInfo = () => {
   const selectedWorkout = useSelector((state) => state.ptStore.selectedWorkoutForm);
@@ -54,12 +55,14 @@ const PlanInfo = () => {
               </div>
             </div>
           </div>
-          <button
-            className="font-[Inter] border border-blue-600 py-2 px-4 
+          <Link to="/workout">
+            <button
+              className="font-[Inter] border border-blue-600 py-2 px-4 
             rounded-md bg-blue-600 text-white hover:bg-blue-800"
-          >
-            View Workout
-          </button>
+            >
+              View Workout
+            </button>
+          </Link>
         </div >
       )}
     </>
