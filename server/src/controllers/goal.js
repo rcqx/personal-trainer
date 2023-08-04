@@ -1,6 +1,7 @@
 import goalsModel from "../models/goals.js";
 import { v4 as uuidv4 } from "uuid";
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
+import BaseError from '../utils/baseError.js';
 
 export const getGoals = catchAsyncErrors(async (req, res, next) => {
   const goals = await goalsModel.find({});
@@ -48,3 +49,19 @@ export const updateGoal = catchAsyncErrors(
      res.status(200).json({ message: 'Fitness Goal updated successfully', updatedGoal });
   }
 );
+
+
+export const deleteFitnessGoal = catchAsyncErrors(async(req, res, next) => {
+  const { _id } = req.body;
+
+  if (!_id) {
+    return next(new BaseError('Please enter id', 400));
+  }
+
+  const deleteFitnessGoal = await goalsModel.findByIdAndDelete(_id);
+
+  if (!deleteFitnessGoal) {
+    return next(new BaseError('Fitness Goal not found', 404));
+  }
+  res.status(200).json({ message: 'Fitness Goal deleted successfully', deleteFitnessGoal });
+})
