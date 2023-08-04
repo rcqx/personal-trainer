@@ -49,3 +49,18 @@ export const updateBodyComposition = catchAsyncErrors(
      res.status(200).json({ message: 'Body composition updated successfully', updateBodyComposition });
   }
 );
+
+export const deleteBodyComposition = catchAsyncErrors(async(req, res, next) => {
+  const { _id } = req.body;
+
+  if (!_id) {
+    return next(new BaseError('Please enter id', 400));
+  }
+
+  const deleteBodyComposition = await bodyCompositionModel.findByIdAndDelete(_id);
+
+  if (!deleteBodyComposition) {
+    return next(new BaseError('Body Composition not found', 404));
+  }
+  res.status(200).json({ message: 'Body composition deleted successfully', deleteBodyComposition });
+})
