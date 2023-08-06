@@ -1,3 +1,6 @@
+import { AiFillDelete } from "react-icons/ai";
+import { RxUpdate } from "react-icons/rx";
+
 const GoalsTable = ({ goal, setGoalsModal, index }) => {
   console.log("GOALS=>", goal);
 
@@ -62,13 +65,16 @@ const GoalsTable = ({ goal, setGoalsModal, index }) => {
           </h3>
         </li>
       </ul>
-      <button
-        className="font-[Inter] border border-blue-600 py-2 px-4 rounded-md bg-blue-600
-      text-white hover:bg-blue-800 mt-8 w-full"
-        onClick={() => setGoalsModal(true)}
-      >
-        Update
-      </button>
+      <div className="flex gap-3">
+        <button
+          className="font-[Inter] py-2 px-4 rounded-md bg-blue-600 flex justify-center items-center
+      text-white mt-8 w-full hover:bg-red-500"
+        >
+          <AiFillDelete className="mr-2" size={20} />
+          Delete
+        </button>
+
+      </div>
     </div>
   );
 };

@@ -8,6 +8,8 @@ import { getBodyComposition } from "../api/bodyComposition";
 import UpdateCompositionModal from "../components/updateModals/updateCompositionModal";
 import UpdateGoalsModal from "../components/updateModals/updateGoalsModal";
 import { getGoals } from "../api/goal";
+import { GrAddCircle } from "react-icons/gr";
+import { VscAdd } from "react-icons/vsc";
 
 const ProfilePage = () => {
   const [compositions, setCompositions] = useState([]);
@@ -75,6 +77,38 @@ const ProfilePage = () => {
               />
             )
           })}
+
+          {goals.length === 2 && (
+            <div className="border-2 border-dashed border-slate-300 w-1/3 rounded-lg flex justify-center items-center">
+              {/* <GrAddCircle size={60} className="text-red-600" /> */}
+              <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+            </div>
+          )}
+
+          {goals.length === 1 && (
+            <>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 rounded-lg flex justify-center items-center">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              </div>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 rounded-lg flex justify-center items-center">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              </div>
+            </>
+          )}
+
+          {goals.length === 0 && (
+            <>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 rounded-lg flex justify-center items-center h-80">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              </div>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 rounded-lg flex justify-center items-center h-80">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              </div>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 rounded-lg flex justify-center items-center h-80">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              </div>
+            </>
+          )}
         </div>
       </div>
       {bcModal && <UpdateCompositionModal bcModal={bcModal} setBcModal={setBcModal} />}
