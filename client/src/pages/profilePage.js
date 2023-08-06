@@ -8,6 +8,8 @@ import { getBodyComposition } from "../api/bodyComposition";
 import UpdateCompositionModal from "../components/updateModals/updateCompositionModal";
 import UpdateGoalsModal from "../components/updateModals/updateGoalsModal";
 import { getGoals } from "../api/goal";
+import { GrAddCircle } from "react-icons/gr";
+import { VscAdd } from "react-icons/vsc";
 
 const ProfilePage = () => {
   const [compositions, setCompositions] = useState([]);
@@ -32,13 +34,15 @@ const ProfilePage = () => {
     fetchData();
   }, []);
 
+  console.log(goals);
+
   return (
     <div className="flex flex-col justify-between mt-10 mb-20">
       <div className="justify-between items-center m-[0_auto] max-w-7xl w-full">
         <div className="flex justify-between items-center border-b antialiased border-slate-300 mb-6">
           <h1 className="font-[Newsreader] text-5xl mb-2">Profile</h1>
         </div>
-        <div id="profile" className="w-full mb-16 flex gap-5">
+        <div id="profile" className="w-full mb-16 flex gap-5 h-96">
           <ProfileCard
             profilePicture={profilePicture}
             name={"John Doe"}
@@ -58,18 +62,53 @@ const ProfilePage = () => {
               </div>
             )}
           </div>
-          <div className="border border-slate-100 antialiased flex-1 flex flex-col justify-center items-center rounded-xl shadow-lg">
-            {!loader ? (
+        </div>
+        <div className="flex justify-between items-center border-b antialiased border-slate-300 mb-6">
+          <h1 className="font-[Newsreader] text-4xl mb-2">Trainning Goals</h1>
+        </div>
+
+        <div className="flex">
+          {goals.map((item, index) => {
+            return (
               <GoalsTable
-                goals={goals}
+                goal={item}
                 setGoalsModal={setGoalsModal}
+                index={index}
               />
-            ) : (
-              <div className="w-5/6 h-80 flex flex-col justify-center items-center">
-                <BiLoaderAlt size={80} className="animate-spin" />
+            )
+          })}
+
+          {goals.length === 2 && (
+            <div className="border-2 border-dashed border-slate-300 w-1/3 rounded-lg flex justify-center items-center">
+              {/* <GrAddCircle size={60} className="text-red-600" /> */}
+              <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+            </div>
+          )}
+
+          {goals.length === 1 && (
+            <>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 rounded-lg flex justify-center items-center">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
               </div>
-            )}
-          </div>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 rounded-lg flex justify-center items-center">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              </div>
+            </>
+          )}
+
+          {goals.length === 0 && (
+            <>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 rounded-lg flex justify-center items-center h-80">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              </div>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 rounded-lg flex justify-center items-center h-80">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              </div>
+              <div className="border-2 border-dashed border-slate-300 w-1/3 rounded-lg flex justify-center items-center h-80">
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              </div>
+            </>
+          )}
         </div>
       </div>
       {bcModal && <UpdateCompositionModal bcModal={bcModal} setBcModal={setBcModal} />}

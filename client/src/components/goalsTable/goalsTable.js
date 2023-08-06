@@ -1,26 +1,31 @@
-const GoalsTable = ({ goals, setGoalsModal }) => {
+import { AiFillDelete } from "react-icons/ai";
+import { RxUpdate } from "react-icons/rx";
+
+const GoalsTable = ({ goal, setGoalsModal, index }) => {
+  console.log("GOALS=>", goal);
+
   return (
-    <div className="w-5/6 h-80 flex flex-col justify-between">
+    <div className="w-1/3 flex flex-col justify-between p-5 rounded-lg border border-slate-100 mr-3 last:mr-0 shadow-md">
       <h2 className="mb-4 text-xl font-semibold antialiased text-slate-700">
-        Trainning Goals
+        {`Training Goal ${index + 1}`}
       </h2>
       <ul className="w-full">
         <li className="flex justify-between">
-          <h3 className="font-light text-slate-600 antialiased">Trainning Focus</h3>
+          <h3 className="font-light text-slate-600 antialiased">Training Focus</h3>
           <h3 className="font-semibold antialiased text-slate-700">
-            {goals[0]?.trainningFocus}
+            {goal?.trainingFocus}
           </h3>
         </li>
         <li className="flex justify-between">
           <h3 className="font-light text-slate-600 antialiased">Weight (kg)</h3>
           <h3 className="font-semibold antialiased text-slate-700">
-            {goals[0]?.weight} kg
+            {goal?.weight} kg
           </h3>
         </li>
         <li className="flex justify-between">
           <h3 className="font-light text-slate-600 antialiased">Body Fat (%)</h3>
           <h3 className="font-semibold antialiased text-slate-700">
-            {goals[0]?.bodyFat} %
+            {goal?.bodyFat} %
           </h3>
         </li>
         <li className="flex justify-between">
@@ -28,7 +33,7 @@ const GoalsTable = ({ goals, setGoalsModal }) => {
             Frequency
           </h3>
           <h3 className="font-semibold antialiased text-slate-700">
-            {goals[0]?.frequency} p/w
+            {goal?.frequency} p/w
           </h3>
         </li>
         <li className="flex justify-between">
@@ -36,7 +41,7 @@ const GoalsTable = ({ goals, setGoalsModal }) => {
             Lean Body Mass
           </h3>
           <h3 className="font-semibold antialiased text-slate-700">
-            {goals[0]?.lbm}
+            {goal?.lbm}
           </h3>
         </li>
         <li className="flex justify-between">
@@ -44,29 +49,32 @@ const GoalsTable = ({ goals, setGoalsModal }) => {
             Body Mass Index
           </h3>
           <h3 className="font-semibold antialiased text-slate-700">
-            {goals[0]?.bmi}
+            {goal?.bmi}
           </h3>
         </li>
         <li className="flex justify-between">
           <h3 className="font-light text-slate-600 antialiased">Flexibility / Mobility</h3>
           <h3 className="font-semibold antialiased text-slate-700">
-            {goals[0]?.flexibility ? "True" : "False"}
+            {goal?.flexibility ? "True" : "False"}
           </h3>
         </li>
         <li className="flex justify-between">
           <h3 className="font-light text-slate-600 antialiased">Cardio</h3>
           <h3 className="font-semibold antialiased text-slate-700">
-            {goals[0]?.cardio ? "True" : "False"}
+            {goal?.cardio ? "True" : "False"}
           </h3>
         </li>
       </ul>
-      <button
-        className="font-[Inter] border border-blue-600 py-2 px-4 rounded-md bg-blue-600
-      text-white hover:bg-blue-800 mt-8 w-full"
-        onClick={() => setGoalsModal(true)}
-      >
-        Update
-      </button>
+      <div className="flex gap-3">
+        <button
+          className="font-[Inter] py-2 px-4 rounded-md bg-blue-600 flex justify-center items-center
+      text-white mt-8 w-full hover:bg-red-500"
+        >
+          <AiFillDelete className="mr-2" size={20} />
+          Delete
+        </button>
+
+      </div>
     </div>
   );
 };
