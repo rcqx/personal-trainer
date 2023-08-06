@@ -32,13 +32,15 @@ const ProfilePage = () => {
     fetchData();
   }, []);
 
+  console.log(goals);
+
   return (
     <div className="flex flex-col justify-between mt-10 mb-20">
       <div className="justify-between items-center m-[0_auto] max-w-7xl w-full">
         <div className="flex justify-between items-center border-b antialiased border-slate-300 mb-6">
           <h1 className="font-[Newsreader] text-5xl mb-2">Profile</h1>
         </div>
-        <div id="profile" className="w-full mb-16 flex gap-5">
+        <div id="profile" className="w-full mb-16 flex gap-5 h-96">
           <ProfileCard
             profilePicture={profilePicture}
             name={"John Doe"}
@@ -58,18 +60,21 @@ const ProfilePage = () => {
               </div>
             )}
           </div>
-          <div className="border border-slate-100 antialiased flex-1 flex flex-col justify-center items-center rounded-xl shadow-lg">
-            {!loader ? (
+        </div>
+        <div className="flex justify-between items-center border-b antialiased border-slate-300 mb-6">
+          <h1 className="font-[Newsreader] text-4xl mb-2">Trainning Goals</h1>
+        </div>
+
+        <div className="flex">
+          {goals.map((item, index) => {
+            return (
               <GoalsTable
-                goals={goals}
+                goal={item}
                 setGoalsModal={setGoalsModal}
+                index={index}
               />
-            ) : (
-              <div className="w-5/6 h-80 flex flex-col justify-center items-center">
-                <BiLoaderAlt size={80} className="animate-spin" />
-              </div>
-            )}
-          </div>
+            )
+          })}
         </div>
       </div>
       {bcModal && <UpdateCompositionModal bcModal={bcModal} setBcModal={setBcModal} />}
