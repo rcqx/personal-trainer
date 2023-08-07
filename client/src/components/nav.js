@@ -37,9 +37,9 @@ const Nav = () => {
           <Link to="/exercise-plans">
             <li className="cursor-pointer">Workouts</li>
           </Link>
-          <Link to="/meal-plans">
+          {/* <Link to="/meal-plans">
             <li className="cursor-pointer">Meal Plans</li>
-          </Link>
+          </Link> */}
           <button
             className="font-[Inter] border border-blue-600 py-2 px-4 rounded-md bg-blue-600 text-white hover:bg-blue-800"
           >

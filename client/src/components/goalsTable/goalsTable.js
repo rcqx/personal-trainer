@@ -5,7 +5,7 @@ const GoalsTable = ({ goal, setGoalsModal, index }) => {
   console.log("GOALS=>", goal);
 
   return (
-    <div className="w-1/3 flex flex-col justify-between p-5 rounded-lg border border-slate-100 mr-3 last:mr-0 shadow-md">
+    <div className="w-1/3 flex flex-col justify-between p-5 border border-slate-100 mr-3 last:mr-0 shadow-md">
       <h2 className="mb-4 text-xl font-semibold antialiased text-slate-700">
         {`Training Goal ${index + 1}`}
       </h2>

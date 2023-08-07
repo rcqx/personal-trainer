@@ -2,7 +2,7 @@ const ProfileCard = ({ profilePicture, name, weight, height, location }) => {
   return (
     <div
       id="profile-pic-container"
-      className="border border-slate-200 shadow-lg flex-1 rounded-lg overflow-hidden flex flex-col"
+      className="border border-slate-200 shadow-lg flex-1 overflow-hidden flex flex-col"
     >
       <div className="flex-1 overflow-hidden relative">
         <img src={profilePicture} className="absolute -top-8" />

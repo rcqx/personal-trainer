@@ -10,7 +10,7 @@ const ExercisePlan = ({
   return (
     <div
       className="w-1/3 border border-slate-200 shadow-md 
-        rounded-3xl overflow-hidden cursor-pointer"
+      overflow-hidden cursor-pointer"
       onClick={() => {
         dispatch(setSelectedWorkoutForm(item));
         setInfoModal(!infoModal);
