@@ -50,7 +50,7 @@ const ProfilePage = () => {
             height={"180 Cm"}
             location={"Calgary, AB. Canada"}
           />
-          <div className="border border-slate-100 antialiased flex-1 flex flex-col justify-center items-center rounded-xl shadow-lg">
+          <div className="border border-slate-100 antialiased flex-1 flex flex-col justify-center items-center shadow-lg">
             {!loader ? (
               <BodyCompositionTable
                 compositions={compositions}
@@ -79,7 +79,7 @@ const ProfilePage = () => {
           })}
 
           {goals.length === 2 && (
-            <div className="border-2 border-dashed border-slate-300 w-1/3 rounded-lg flex justify-center items-center">
+            <div className="border-2 border-dashed border-slate-300 w-1/3 flex justify-center items-center">
               {/* <GrAddCircle size={60} className="text-red-600" /> */}
               <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
             </div>
@@ -87,10 +87,10 @@ const ProfilePage = () => {
 
           {goals.length === 1 && (
             <>
-              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 rounded-lg flex justify-center items-center">
+              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 flex justify-center items-center">
                 <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
               </div>
-              <div className="border-2 border-dashed border-slate-300 w-1/3 rounded-lg flex justify-center items-center">
+              <div className="border-2 border-dashed border-slate-300 w-1/3 flex justify-center items-center">
                 <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
               </div>
             </>
@@ -98,13 +98,13 @@ const ProfilePage = () => {
 
           {goals.length === 0 && (
             <>
-              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 rounded-lg flex justify-center items-center h-80">
+              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 flex justify-center items-center h-80">
                 <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
               </div>
-              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 rounded-lg flex justify-center items-center h-80">
+              <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 flex justify-center items-center h-80">
                 <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
               </div>
-              <div className="border-2 border-dashed border-slate-300 w-1/3 rounded-lg flex justify-center items-center h-80">
+              <div className="border-2 border-dashed border-slate-300 w-1/3 flex justify-center items-center h-80">
                 <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
               </div>
             </>
