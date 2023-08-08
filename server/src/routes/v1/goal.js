@@ -12,6 +12,6 @@ router.get("/:_id", getFitnessGoalById);
 // create goal
 router.post("/new", addGoal);
 router.put("/update", updateGoal);
-router.delete("/delete", deleteFitnessGoal);
+router.delete("/delete/:_id", deleteFitnessGoal);
 
 export default router;
