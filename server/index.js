@@ -42,7 +42,7 @@ app.use("/api", router);
 app.use("/api/v1", routerV1);
 app.use(express.urlencoded({ extended: true }));
 const server = app.listen(config.port, () => {
-  console.log(`Server Started at ${config.port}`);
+  console.log(`Server Started at ${config.port} in ${config.env}`);
 });
 
 // Middleware to handle errors
