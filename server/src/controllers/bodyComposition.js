@@ -8,6 +8,21 @@ export const getAllCompostions = catchAsyncErrors(async (req, res) => {
   res.status(200).json(items);
 });
 
+export const getBodyCompositionById = catchAsyncErrors(async(req, res, next) => {
+  const { _id } = req.params;
+
+  if (!_id) {
+    return next(new BaseError('Please enter id', 400));
+  }
+
+  const bodyComposition = await bodyCompositionModel.findById(_id);
+
+  if (!bodyComposition) {
+    return next(new BaseError('Body Composition not found', 404));
+  }
+  res.status(200).json(bodyComposition);
+})
+
 export const addBodyComposition = catchAsyncErrors(async (req, res) => {
   const data = new bodyCompositionModel({
     id: uuidv4(),

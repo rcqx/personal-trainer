@@ -4,13 +4,15 @@ import {
   getAllCompostions,
   addBodyComposition,
   updateBodyComposition,
-  deleteBodyComposition
+  deleteBodyComposition,
+  getBodyCompositionById
 } from "../../controllers/bodyComposition.js";
 
 const router = express.Router();
 
 // GET body compositions
 router.get("/", getAllCompostions);
+router.get("/:_id", getBodyCompositionById);
 // create body composition
 router.post("/new", addBodyComposition);
 router.put("/update", updateBodyComposition);
