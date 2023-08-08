@@ -66,7 +66,7 @@ export const updateBodyComposition = catchAsyncErrors(
 );
 
 export const deleteBodyComposition = catchAsyncErrors(async(req, res, next) => {
-  const { _id } = req.body;
+  const { _id } = req.params;
 
   if (!_id) {
     return next(new BaseError('Please enter id', 400));

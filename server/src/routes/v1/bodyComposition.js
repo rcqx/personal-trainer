@@ -16,6 +16,6 @@ router.get("/:_id", getBodyCompositionById);
 // create body composition
 router.post("/new", addBodyComposition);
 router.put("/update", updateBodyComposition);
-router.delete("/delete", deleteBodyComposition);
+router.delete("/delete/:_id", deleteBodyComposition);
 
 export default router;
