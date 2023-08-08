@@ -8,6 +8,21 @@ export const getGoals = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json(goals);
 });
 
+export const getFitnessGoalById = catchAsyncErrors(async(req, res, next) => {
+  const { _id } = req.params;
+
+  if (!_id) {
+    return next(new BaseError('Please enter id', 400));
+  }
+
+  const fitnessGoal = await goalsModel.findById(_id);
+
+  if (!fitnessGoal) {
+    return next(new BaseError('Fitness Goal not found', 404));
+  }
+  res.status(200).json(fitnessGoal);
+})
+
 export const addGoal = catchAsyncErrors(async (req, res, next) => {
   const data = new goalsModel({
     id: uuidv4(),
