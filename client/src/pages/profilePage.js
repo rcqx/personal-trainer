@@ -8,8 +8,8 @@ import { getBodyComposition } from "../api/bodyComposition";
 import UpdateCompositionModal from "../components/updateModals/updateCompositionModal";
 import UpdateGoalsModal from "../components/updateModals/updateGoalsModal";
 import { getGoals } from "../api/goal";
-import { GrAddCircle } from "react-icons/gr";
 import { VscAdd } from "react-icons/vsc";
+import Modal from "../components/modal/modal";
 
 const ProfilePage = () => {
   const [compositions, setCompositions] = useState([]);
@@ -17,6 +17,7 @@ const ProfilePage = () => {
   const [goalsModal, setGoalsModal] = useState(false);
   const [loader, setLoader] = useState(true);
   const [goals, setGoals] = useState([]);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +35,11 @@ const ProfilePage = () => {
     fetchData();
   }, []);
 
-  console.log(goals);
+  const showModal = () => {
+    setModal(!modal);
+  }
+
+  console.log(modal);
 
   return (
     <div className="flex flex-col justify-between mt-10 mb-20">
@@ -99,7 +104,7 @@ const ProfilePage = () => {
           {goals.length === 0 && (
             <>
               <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 flex justify-center items-center h-80">
-                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" onClick={showModal} />
               </div>
               <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 flex justify-center items-center h-80">
                 <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
@@ -113,6 +118,13 @@ const ProfilePage = () => {
       </div>
       {bcModal && <UpdateCompositionModal bcModal={bcModal} setBcModal={setBcModal} />}
       {goalsModal && <UpdateGoalsModal goalsModal={goalsModal} setGoalsModal={setGoalsModal} />}
+
+      <Modal
+        modal={modal}
+        onClose={() => setModal(false)}
+        title={"Create a new training goal"}
+      />
+
     </div>
   );
 };
