@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  id: {
+  _id: {
     type: String,
-    required: true,
     unique: true, // Ensure the ID is unique
   },
   name: {
@@ -57,4 +56,5 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+export default User;

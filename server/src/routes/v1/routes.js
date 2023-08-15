@@ -6,6 +6,7 @@ import bodyCompositionRoutes from './bodyComposition.js';
 import goalRoutes from './goal.js';
 import workoutRoutes from './workout.js';
 import mealPlanRoutes from './mealPlan.js';
+import userRoutes from './user.js';
 
 
 router.get("/", (req, res, next) => {
@@ -17,6 +18,7 @@ router.use('/body-composition', bodyCompositionRoutes);
 router.use('/goal', goalRoutes);
 router.use('/workout', workoutRoutes);
 router.use('/mealplan', mealPlanRoutes);
+router.use('/user', userRoutes);
 
 
 export default router;
