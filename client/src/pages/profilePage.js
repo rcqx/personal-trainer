@@ -122,7 +122,7 @@ const ProfilePage = () => {
       <Modal
         modal={modal}
         onClose={() => setModal(false)}
-        title={"Create a new training goal"}
+        title={"New training goal"}
       />
 
     </div>
