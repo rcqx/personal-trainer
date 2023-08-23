@@ -26,7 +26,7 @@ const Modal = ({ modal, onClose, title }) => (
         </h3>
       </div>
       <div id="modal-body">
-        <CreateTrainningGoalForm />
+        <CreateTrainningGoalForm onClose={onClose} />
       </div>
     </div>
   </div>

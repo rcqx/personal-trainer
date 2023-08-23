@@ -39,8 +39,6 @@ const ProfilePage = () => {
     setModal(!modal);
   }
 
-  console.log(modal);
-
   return (
     <div className="flex flex-col justify-between mt-10 mb-20">
       <div className="justify-between items-center m-[0_auto] max-w-7xl w-full">
@@ -69,7 +67,7 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className="flex justify-between items-center border-b antialiased border-slate-300 mb-6">
-          <h1 className="font-[Newsreader] text-4xl mb-2">Trainning Goals</h1>
+          <h1 className="font-[Newsreader] text-4xl mb-2">Training Goals</h1>
         </div>
 
         <div className="flex">
@@ -85,18 +83,17 @@ const ProfilePage = () => {
 
           {goals.length === 2 && (
             <div className="border-2 border-dashed border-slate-300 w-1/3 flex justify-center items-center">
-              {/* <GrAddCircle size={60} className="text-red-600" /> */}
-              <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+              <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" onClick={showModal} />
             </div>
           )}
 
           {goals.length === 1 && (
             <>
               <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 flex justify-center items-center">
-                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" onClick={showModal} />
               </div>
               <div className="border-2 border-dashed border-slate-300 w-1/3 flex justify-center items-center">
-                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" onClick={showModal} />
               </div>
             </>
           )}
@@ -107,10 +104,10 @@ const ProfilePage = () => {
                 <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" onClick={showModal} />
               </div>
               <div className="border-2 border-dashed border-slate-300 w-1/3 mr-2 flex justify-center items-center h-80">
-                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" onClick={showModal} />
               </div>
               <div className="border-2 border-dashed border-slate-300 w-1/3 flex justify-center items-center h-80">
-                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" />
+                <VscAdd size={50} className="text-slate-400 cursor-pointer hover:scale-110" onClick={showModal} />
               </div>
             </>
           )}
